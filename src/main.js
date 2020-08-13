@@ -3,6 +3,8 @@
 import Vue from 'vue';
 // 导入app组件
 import app from './App.vue';
+// 导入路由相关文件router.js文件
+import router from './router.js';
 // 导入mui所需要的的css和js文件
 import './lib/mui/css/mui.min.css';
 // 参照mui官方文档，扩展字体要使用，需要添加
@@ -20,31 +22,35 @@ vue路由的使用过程：1.除了安装使用vue需要的包 vue、vue-loader�
 import VueRouter from 'vue-router'; //导入路由包
 // 将路由router单独成一个router.js文件
 Vue.use(VueRouter); //安装使用
-// 导入home member search shopping共4个组件
-import home from './components/home/Home.vue';
-import member from './components/home/Member.vue';
-import shopping from './components/home/Shopping.vue';
-import search from './components/home/Search.vue';
-var router = new VueRouter({
-    routes: [
-        {
-            path: '/home',
-            component: home,
-        },
-        {
-            path: '/member',
-            component: member,
-        },
-        {
-            path: '/shopping',
-            component: shopping,
-        },
-        {
-            path: '/search',
-            component: search,
-        },
-    ],
-});
+// // 导入home member search shopping共4个组件
+// import home from './components/home/Home.vue';
+// import member from './components/home/Member.vue';
+// import shopping from './components/home/Shopping.vue';
+// import search from './components/home/Search.vue';
+// var router = new VueRouter({
+//     routes: [
+//         {
+//             path: '/',
+//             redirect: '/home',
+//         },
+//         {
+//             path: '/home',
+//             component: home,
+//         },
+//         {
+//             path: '/member',
+//             component: member,
+//         },
+//         {
+//             path: '/shopping',
+//             component: shopping,
+//         },
+//         {
+//             path: '/search',
+//             component: search,
+//         },
+//     ],
+// });
 var vm = new Vue({
     el: '#app',
     data: {},

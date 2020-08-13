@@ -3,6 +3,11 @@
 ### 主页的设计
 + 主页的头部栏header（使用mint-ui组件）和切换栏tabbar（使用mui组件）的样式设计
 + tabbar栏的功能切换
+   + 在router.js中定义路由自带的排他性样式，通过linkActiveClass属性设置
+   + 设置为mui-class,覆盖掉第一个router-link中的默认定义
+   + 删除第一个router-link中的默认的class="mui-active",以避免出现选中两个路由按钮的情况
++ 主页轮播图的实现
+
 # 这是一个项目
 
 ## 一个基础项目

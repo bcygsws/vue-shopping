@@ -3,7 +3,8 @@
         <mt-header fixed title="学无止境-网课随心购"></mt-header>
         <!-- <h1>这是App组件</h1> -->
         <nav class="mui-bar mui-bar-tab">
-            <router-link class="mui-tab-item mui-active" to="/home">
+            <!-- 在router.js中也自定义一个mui-active后，必须删除其中默认的类样式mui-active,否则会出现同时选中home和其他三个之一共两个按钮显示选中蓝色的情况 -->
+            <router-link class="mui-tab-item" to="/home">
                 <span class="mui-icon mui-icon-home"></span>
                 <span class="mui-tab-label">首页</span>
             </router-link>
@@ -36,16 +37,7 @@
 <style lang="scss" scoped>
     .container {
         margin-top: 40px;
-    }
-    .mui-icon-extra {
-        font-family: MuiiconSpread;
-        font-size: 24px;
-        font-weight: normal;
-        font-style: normal;
-        line-height: 1;
-        display: inline-block;
-        text-decoration: none;
-        -webkit-font-smoothing: antialiased;
+        margin-bottom: 50px;
     }
     .mui-bar .mui-icon-extra {
         font-size: 24px;
@@ -79,7 +71,13 @@
         color: #fff;
         background: red;
     }
-
+    /* mui-active在router文件中设定，和routes是同级属性。来设置一个选中路由时的类名，在router.js中已经定义了
+    linkActiveClass:'mui-active',此处自定义了mui-active,同时也是对App.vue（覆盖后删掉第一个router-link标签中的
+    mui-active类样式，否则会出现选择非home按钮时，出现两个按钮选中蓝色的情况）中默认的mui-active进行覆盖。
+     */
+    .mui-bar-tab .mui-tab-item.mui-active {
+        color: #007aff;
+    }
     /*购物车原本样式*/
     /* 去掉mui-icon之前相关的样式，和mui-icon-extra现有样式对比*/
     /* .mui-icon {
