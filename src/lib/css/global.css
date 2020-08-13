@@ -1,0 +1,25 @@
+.thumbs {
+    display: flex;
+}
+
+.thumbs>div {
+    width: 100%;
+}
+
+.thumbs .my-gallery {
+    display: flex;
+    /* 设置缩略图占满一行后，环绕：即图片缩略图换行排布 */
+    flex-wrap: wrap;
+}
+
+.thumbs .my-gallery figure {
+    margin: 10px;
+    box-shadow: 0 0 10px #cccccc;
+}
+
+.thumbs .my-gallery figure img {
+    /* width 100px是图片在默认缩略状态时的宽度 */
+    width: 100px;
+    /* 设置img和外层的盒子底部对齐，去除和其外层盒子的间隙 */
+    vertical-align: middle;
+}
