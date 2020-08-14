@@ -2,6 +2,7 @@
     <div class="container">
         <mt-header fixed title="学无止境-网课随心购"></mt-header>
         <!-- <h1>这是App组件</h1> -->
+        <!-- 这是tabbar按钮 -->
         <nav class="mui-bar mui-bar-tab">
             <!-- 在router.js中也自定义一个mui-active后，必须删除其中默认的类样式mui-active,否则会出现同时选中home和其他三个之一共两个按钮显示选中蓝色的情况 -->
             <router-link class="mui-tab-item" to="/home">

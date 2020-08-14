@@ -1,14 +1,14 @@
+/* jshint esversion:6 */
 // 路由相关文件
 import VueRouter from 'vue-router';
 // 导入home member search shopping共4个组件
-import home from './components/home/Home.vue';
-import member from './components/home/Member.vue';
-import shopping from './components/home/Shopping.vue';
-import search from './components/home/Search.vue';
+import home from './components/tabbar/Home.vue';
+import member from './components/tabbar/Member.vue';
+import shopping from './components/tabbar/Shopping.vue';
+import search from './components/tabbar/Search.vue';
 var router = new VueRouter({
     routes: [
         {
-            name: '首页',
             path: '/',
             redirect: '/home',
         },
