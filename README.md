@@ -9,9 +9,13 @@
   - 在 router.js 中定义路由自带的排他性样式，通过 linkActiveClass 属性设置
   - 设置为 mui-class,覆盖掉第一个 router-link 中的默认定义
   - 删除第一个 router-link 中的默认的 class="mui-active",以避免出现选中两个路由按钮的情况
+  - tabbar 中购物车按钮，使用了扩展字体，参考 mui 官方文档进行引入文件，设置样式。同时用 mui-icon-extra 替换所有和 mui-icon 相关的样式，原因是购物车这个按钮特殊，去掉了自带的 mui-icon 类样式，添加的是 mui-icon-extra
 - 主页轮播图的实现
   - 注意轮播图的复用-需要单独抽离组件，复用的主要是其 view 层，因此，业务逻辑需要写在 home 层
   - 注意轮播图的宽度的在不同场合下的设置，首页轮播图（宽度 100%）、详情轮播图（宽度自适应，更美观）
+- 六宫格实现
+  - 通过 mui 库中的 grid-default.html 来中 html 片段来模拟，将九宫改成六宫格，同时去掉 mui-col-sm-3，保留 mui-col-es-4，使得每排为三个格子
+  - bug 解决：当六宫格完成后，发现路由不能正常切换了。解决办法：将原 mui-tab-item 相关的样式保存起来，将 template 中的所有的 mui-tab-item 的样式替换为 mui-tab-item2。包括使用了扩展字体的【购物车】按钮中的 mui-tab-item 也同步替换成 mui-tab-item2
 
 # 这是一个项目
 
