@@ -17,10 +17,11 @@
     <!-- 六宫格，又九宫格改造而来 -->
       <ul class="mui-table-view mui-grid-view mui-grid-9">
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
-          <a href="#">
+          <!-- 改造路由后，router-link定义后，自己会去找router-view,router-view放在了App中顶部栏和tabbar之间的区域 -->
+          <router-link to="/home/newslist">
             <img src="../../images/menu1.png" alt="" />
             <div class="mui-media-body">教育新闻</div>
-          </a>
+          </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
           <a href="#">

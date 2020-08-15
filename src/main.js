@@ -61,7 +61,15 @@ Vue.http.options.root = "http://www.liulongbin.top:3005/";
 //         },
 //     ],
 // });
-
+import Moment from "moment";
+// 格式化的时间在应用中多次用到，我们使用moment包来格式化时间。定义一个一个全局过滤器，以使得各个组件都能引用这个过滤器
+/* 
+  pattern = "YYYY-MM-DD HH-mm-ss"是为pattern设置了一个默认值，即调用过滤器时，没有带参数的话，参数pattern就是默认值
+  如果dateFormat要更改参数，可以在调用时，{{渲染数据 | dateFormat(自己设置的pattern参数值)}}
+*/
+Vue.filter("dateFormat", function(datastr, pattern = "YYYY-MM-DD HH-mm-ss") {
+  return Moment(datastr).format(pattern);
+});
 var vm = new Vue({
   el: "#app",
   data: {},
