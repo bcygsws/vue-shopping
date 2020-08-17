@@ -9,7 +9,7 @@
         v-for="item in newslist"
         :key="item.id"
       >
-        <a href="javascript:;">
+        <router-link :to="'/home/newslist/' + item.id">
           <img class="mui-media-object mui-pull-left" :src="item.img_url" />
           <div class="mui-media-body">
             <h3>{{ item.title }}</h3>
@@ -19,7 +19,7 @@
               <span>点击次数：{{ item.click }}次</span>
             </div>
           </div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>

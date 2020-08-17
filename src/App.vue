@@ -37,8 +37,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  margin-top: 40px;
-  margin-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 50px;
 }
 .mui-bar .mui-icon-extra {
   font-size: 24px;
