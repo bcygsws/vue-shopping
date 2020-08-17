@@ -15,10 +15,11 @@ import "./lib/mui/js/mui.min.js";
 // 固定在顶部栏，要引用Mint UI中的组件
 // 导入Swipe组件-轮播图组件
 // 请求数据失败 弹框提示组件Toast
-import { Header, Swipe, SwipeItem } from "mint-ui";
+import { Header, Swipe, SwipeItem, Button } from "mint-ui";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 /* 
 vue路由的使用过程：1.除了安装使用vue需要的包 vue、vue-loader、vue-template-compiler包，还需要安装vue路由包vue-router
 2.导入vue-router包，拿到VueRouter对象，并使用Vue.use注册到vue中
