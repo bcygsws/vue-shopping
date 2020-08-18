@@ -33,6 +33,8 @@ Vue.use(VueResourse);
 // 涉及了vue请求后台数据，必须先将VueResource注册到Vue中，否则Vue.http.options会报错options没有定义
 // 为了增强代码的可维护性：做到一处修改，多处引用。对一个数据接口的主机号+端口号地址，进行全局配置。让其他组件可以共享
 Vue.http.options.root = "http://www.liulongbin.top:3005/";
+// 定义post请求提交表单的数据格式，默认为application/x-www-form-urlencoded。在post请求处是this.$http.post()的第三个参数
+Vue.http.options.emulateJSON = true;
 // // 导入home member search shopping共4个组件
 // import home from './components/home/Home.vue';
 // import member from './components/home/Member.vue';
@@ -68,7 +70,7 @@ import Moment from "moment";
   pattern = "YYYY-MM-DD HH-mm-ss"是为pattern设置了一个默认值，即调用过滤器时，没有带参数的话，参数pattern就是默认值
   如果dateFormat要更改参数，可以在调用时，{{渲染数据 | dateFormat(自己设置的pattern参数值)}}
 */
-Vue.filter("dateFormat", function(datastr, pattern = "YYYY-MM-DD HH-mm-ss") {
+Vue.filter("dateFormat", function(datastr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return Moment(datastr).format(pattern);
 });
 var vm = new Vue({

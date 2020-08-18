@@ -16,9 +16,15 @@
 - 六宫格实现
   - 通过 mui 库中的 grid-default.html 来中 html 片段来模拟，将九宫改成六宫格，同时去掉 mui-col-sm-3，保留 mui-col-es-4，使得每排为三个格子
   - bug 解决：当六宫格完成后，发现路由不能正常切换了。解决办法：将原 mui-tab-item 相关的样式保存起来，将 template 中的所有的 mui-tab-item 的样式替换为 mui-tab-item2。包括使用了扩展字体的【购物车】按钮中的 mui-tab-item 也同步替换成 mui-tab-item2
+     - 【新闻资讯】--->列表展示页
      - 六宫格【新闻资讯】按钮。作用：展示新闻列表信息
      - template使用mui中的media-list.html中的组件
-     - 后台数据接口的请求URL, apl/getnewslist
+     - 新闻列表项--->新闻详情页(自己布局)
+     - 改造列表项路由，在router.js中添加路由匹配规则（带参数id，指示哪一条列表信被点击了。通过在详情页中使用this.$route.params.id中获取）
+     - 新闻详情页=详情内容+评论模块（用户评论框【提交评论】+评论列表展示+【加载更多】）
+
+     - 【图片分享】--->图片展示页
+
 
 # 这是一个项目
 

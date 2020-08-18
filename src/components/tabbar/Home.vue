@@ -20,19 +20,19 @@
           <!-- 改造路由后，router-link定义后，自己会去找router-view,router-view放在了App中顶部栏和tabbar之间的区域 -->
           <router-link to="/home/newslist">
             <img src="../../images/menu1.png" alt="" />
-            <div class="mui-media-body">教育新闻</div>
+            <div class="mui-media-body">新闻资讯</div>
           </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
           <a href="#">
             <img src="../../images/menu2.png" alt=""/></img>
-            <div class="mui-media-body">课程分享</div>
+            <div class="mui-media-body">图片分享</div>
           </a>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
           <a href="#">
             <img src="../../images/menu3.png" alt="">
-            <div class="mui-media-body">书籍购买</div>
+            <div class="mui-media-body">商品购买</div>
           </a>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
