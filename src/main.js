@@ -91,6 +91,13 @@ import Moment from "moment";
 Vue.filter("dateFormat", function(datastr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return Moment(datastr).format(pattern);
 });
+// 缩略图要用到的包vue-preview
+// a.导入包
+import VuePreview from "vue-preview";
+// b.默认方式安装到Vue
+Vue.use(VuePreview);
+// c.导入缩略图样式文件
+import "./lib/css/global.css";
 var vm = new Vue({
   el: "#app",
   data: {},
