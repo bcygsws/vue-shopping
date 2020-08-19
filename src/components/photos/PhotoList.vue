@@ -23,16 +23,23 @@
     </div>
 
     <ul class="img_list">
-      <li v-for="item in photolist" :key="item.id">
+      <router-link
+        v-for="item in photolist"
+        :key="item.id"
+        tag="li"
+        :to="'/home/photoinfo/' + item.id"
+      >
         <!--但是对于服务器来说，一上来就加载数十张图片，需要向服务器发送多次请求，这样会增加服务器的压力。同时，如果图片依赖
       js文件，js文件在文档顶部的话，页面的呈现将非常慢，大大影响用户体验。为此，使用懒加载技术来展示图片列表-->
         <!--<img :src="item.img_url" alt="" />-->
+        <!--懒加载图片列表后，实现点击图片，跳转到图片详情。改造路由，将li改造为router-link,但是router-link默认渲染成a标签，
+        为此为router-link标签添加tag="li"属性，指示router-link标签将渲染成li标签-->
         <img v-lazy="item.img_url" alt="" />
         <dl class="img_content">
           <dt class="img_title">{{ item.title }}</dt>
           <dd class="img_body">{{ item.zhaiyao }}</dd>
         </dl>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
