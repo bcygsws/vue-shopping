@@ -15,11 +15,29 @@ import "./lib/mui/js/mui.min.js";
 // 固定在顶部栏，要引用Mint UI中的组件
 // 导入Swipe组件-轮播图组件
 // 请求数据失败 弹框提示组件Toast
-import { Header, Swipe, SwipeItem, Button } from "mint-ui";
-Vue.component(Header.name, Header);
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
+// 为了真正实现图片懒加载的效果，需要全局引入mint-ui包
+// a.导入包
+import MintUI from "mint-ui";
+// b.导入样式文件
+import "mint-ui/lib/style.css";
+// c.注册到vue中
+Vue.use(MintUI);
+// d.配置babelrc文件
+/* 
+  在.babelrc中plugins属性中配置以下代码：
+["component", [
+{"libraryName":"mint-ui","style":true}
+]]
+*/
+
+// import { Header, Swipe, SwipeItem, Button } from "mint-ui";
+// Vue.component(Header.name, Header);
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name, Button);
+// a.使用图片懒加载技术---但是懒加载不起作用。解决办法：全局导入mint-ui包，而不是按需导入
+// import { Lazyload } from "mint-ui";
+// Vue.use(Lazyload);
 /* 
 vue路由的使用过程：1.除了安装使用vue需要的包 vue、vue-loader、vue-template-compiler包，还需要安装vue路由包vue-router
 2.导入vue-router包，拿到VueRouter对象，并使用Vue.use注册到vue中

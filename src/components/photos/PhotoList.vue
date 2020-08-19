@@ -1,5 +1,5 @@
 <template>
-  <div id="photo_container">
+  <div class="photo_container">
     <!-- <h2>这是图片列表组件</h2> -->
     <!-- 顶部滑动条，使用mui tab-top-webview-main.html中组件 -->
     <div id="slider" class="mui-slider">
@@ -14,6 +14,7 @@
             :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']"
             href="#item1mobile"
             :key="item.id"
+            @click="getImgList(item.id)"
           >
             {{ item.title }}
           </a>
@@ -21,19 +22,45 @@
       </div>
     </div>
 
-    <ul>
-      <li>
-        <a href=""><img src="" alt=""/></a>
+    <ul class="img_list">
+      <li v-for="item in photolist" :key="item.id">
+        <!--但是对于服务器来说，一上来就加载数十张图片，需要向服务器发送多次请求，这样会增加服务器的压力。同时，如果图片依赖
+      js文件，js文件在文档顶部的话，页面的呈现将非常慢，大大影响用户体验。为此，使用懒加载技术来展示图片列表-->
+        <!--<img :src="item.img_url" alt="" />-->
+        <img v-lazy="item.img_url" alt="" />
+        <dl class="img_content">
+          <dt class="img_title">{{ item.title }}</dt>
+          <dd class="img_body">{{ item.zhaiyao }}</dd>
+        </dl>
       </li>
     </ul>
   </div>
 </template>
 <script>
+// 初始化滑动条mui('.mui-scroll-wrapper').scroll()后，提示“Error in mounted hook: "ReferenceError: mui is not defined"”
+import mui from "../../lib/mui/js/mui.min";
 export default {
   data() {
     return {
+      // 存储图片分类的id
       catList: [],
+      // 默认加载项【全部】的分类id
+      catId: 0,
+      // 选中一个a后的存储图片的id
+      photolist: [],
     };
+  },
+  created() {
+    this.getImgCate();
+  },
+  mounted() {
+    // mounted钩子函数，是DOM模板编译完成，并挂载到页面上了。页面中的DOM结构被渲染完成时调用
+    // 实际上，初始化顶部滑动条，在这个时期，因为此时DOM结构已经渲染到页面上了，屏幕中才能看到
+    mui(".mui-scroll-wrapper").scroll({
+      deceleration: 0.0005, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    //图片分享--->图片列表展示，默认加载【全部】按钮所展示的图片列表，【全部】分类的id为0，设置为id的默认值
+    this.getImgList(this.catId);
   },
   methods: {
     // 获取图片分类id
@@ -51,20 +78,81 @@ export default {
         }
       });
     },
-  },
-  created() {
-    this.getImgCate();
+    // 获取展示图片内容
+    getImgList(id) {
+      this.$http.get("api/getimages/" + id).then((result) => {
+        if (result.status == 200) {
+          console.log(result.body.message);
+          this.photolist = result.body.message;
+        }
+      });
+    },
   },
 };
 </script>
 <style lang="less" scoped>
+/* 问题：浏览器下方总是出现警告，诸如：[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See <URL> */
+/* 添加下面样式解决 */
+* {
+  touch-action: pan-y;
+}
+
 .photo_container {
-  .mui-segmented-control.mui-segmented-control-inverted {
+  .mui-segmented-control {
     a.mui-control-item.mui-active {
       color: #007aff;
       border-bottom: 0;
       background: 0 0;
     }
   }
+  > ul.img_list {
+    padding: 0 10px;
+    li {
+      width: 100%;
+      position: relative;
+      margin-bottom: 10px;
+      /* 加一个阴影效果 */
+      box-shadow: 0 0 10px #999;
+      /* 图片的显示样式 */
+      img {
+        width: 100%;
+        height: 100%;
+        vertical-align: bottom;
+      }
+      /* 图片加载时的样式 */
+      img[lazy="loading"] {
+        width: 40px;
+        height: 300px;
+        margin: auto;
+      }
+      .img_content {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        font-size: 13px;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.4);
+        /* 清除dl的默认外边距 */
+        margin: 0;
+        /* 设置一个最大高度 */
+        max-height: 110px;
+        padding: 2px;
+        .img_title {
+          font-size: 14px;
+        }
+        .img_body {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }
+/* 懒加载技术，需要的样式如下：放到less结构中去
+   然而，仅仅按照mint-ui官方文档，懒加载图片无法显示效果，解决办法，需要在main.js中全局引入mint-ui包
+ */
+/* img[lazy="loading"] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+} */
 </style>
