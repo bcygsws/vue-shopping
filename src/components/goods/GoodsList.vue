@@ -123,6 +123,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      /* 和flex布局结合，保证每一行的两个goodsitem等高，且最小高度为293px */
       min-height: 293px;
       border: 1px solid #ccc;
       box-shadow: 0 0 8px #ccc;

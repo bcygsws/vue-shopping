@@ -21,6 +21,7 @@
           </div>
           <div class="purNum">
             <span>购买数量:</span>
+            <!--使用mui中封装的组件 numbox.html-->
             <div class="mui-numbox">
               <button class="mui-btn mui-btn-numbox-minus" type="button">
                 -
