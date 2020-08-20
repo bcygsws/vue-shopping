@@ -103,7 +103,7 @@ import VuePreview from "vue-preview";
 // b.默认方式安装到Vue
 Vue.use(VuePreview);
 // c.导入缩略图样式文件
-import "./lib/css/global.css";
+import "./lib/css/global.scss";
 var vm = new Vue({
   el: "#app",
   data: {},

@@ -137,6 +137,7 @@ export default {
       }
     }
     dd {
+      font-size: 13px;
       margin-left: 30px;
       padding: 10px 0;
     }

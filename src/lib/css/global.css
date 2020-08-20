@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .thumbs {
   display: flex;
 }
@@ -10,8 +11,9 @@
   display: flex;
   /* 设置缩略图占满一行后，环绕：即图片缩略图换行排布 */
   flex-wrap: wrap;
+  /* 渲染后每一张图都是一个figure */
 }
-/* 渲染后每一张图都是一个figure */
+
 .thumbs .my-gallery figure {
   margin: 10px;
   box-shadow: 0 0 10px #cccccc;

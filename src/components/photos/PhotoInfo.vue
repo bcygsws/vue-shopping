@@ -57,7 +57,7 @@ export default {
           result.body.message.forEach((item) => {
             // 设置在vue-preview 全屏浏览时的宽和高
             item.w = 600;
-            item.h = 600;
+            item.h = 400;
             item.msrc = item.src;
             this.thumbsList.push(item);
           });

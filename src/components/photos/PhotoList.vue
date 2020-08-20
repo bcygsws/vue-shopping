@@ -8,13 +8,21 @@
         class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
         <div class="mui-scroll">
-          <!--默认选中【全部】这个a连接，【全部】的id为0,在获取分类数据后，自己拼接的对象-->
-          <a
+          <!--默认选中【全部】这个a连接，【全部】的id为0,在获取分类数据后，自己拼接的对象。注意：在移动端中使用tap事件代替click
+          事件,用tap可以解决一些切换bug-->
+          <!--<a
             v-for="item in catList"
             :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']"
             href="#item1mobile"
             :key="item.id"
             @click="getImgList(item.id)"
+          >-->
+          <a
+            v-for="item in catList"
+            :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']"
+            href="#item1mobile"
+            :key="item.id"
+            @tap="getImgList(item.id)"
           >
             {{ item.title }}
           </a>
@@ -127,7 +135,7 @@ export default {
         vertical-align: bottom;
       }
       /* 图片加载时的样式 */
-      img[lazy=loading] {
+      img[lazy="loading"] {
         width: 40px;
         height: 300px;
         margin: auto;
