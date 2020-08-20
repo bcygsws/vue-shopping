@@ -30,10 +30,10 @@
           </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
-          <a href="#">
+          <router-link to="/home/goodslist">
             <img src="../../images/menu3.png" alt="">
             <div class="mui-media-body">商品购买</div>
-          </a>
+          </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4">
           <a href="#">
