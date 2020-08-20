@@ -127,7 +127,7 @@ export default {
         vertical-align: bottom;
       }
       /* 图片加载时的样式 */
-      img[lazy="loading"] {
+      img[lazy=loading] {
         width: 40px;
         height: 300px;
         margin: auto;
