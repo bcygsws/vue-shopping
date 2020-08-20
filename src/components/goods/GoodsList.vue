@@ -78,7 +78,7 @@ export default {
         .get("api/getgoods?pageindex=" + this.pageindex)
         .then((result) => {
           if (result.status == 200) {
-            console.log(result.body.message);
+            // console.log(result.body.message);
             this.goodsData = this.goodsData.concat(result.body.message);
           } else {
             Toast("加载商品列表失败……");
@@ -118,14 +118,19 @@ export default {
     justify-content: space-between;
     padding: 7px;
     .goodsitem {
-      width: 48%;
-      margin: 3px;
+      width: 49%;
+      margin: 3px 1px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       min-height: 293px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 8px #ccc;
       img {
-        width: 171px;
+        /* 要设配各种不同设备，将具体宽高值改为百分比的形式 */
+        width: 98%;
+        vertical-align: bottom;
+        margin: 0 1%;
       }
       h3 {
         font-size: 14px;
