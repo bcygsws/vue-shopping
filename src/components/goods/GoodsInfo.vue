@@ -21,16 +21,8 @@
           </div>
           <div class="purNum">
             <span>购买数量:</span>
-            <!--使用mui中封装的组件 numbox.html-->
-            <div class="mui-numbox">
-              <button class="mui-btn mui-btn-numbox-minus" type="button">
-                -
-              </button>
-              <input class="mui-input-numbox" type="number" />
-              <button class="mui-btn mui-btn-numbox-plus" type="button">
-                +
-              </button>
-            </div>
+            <!--使用mui中封装的组件 numbox.html，该组件需要手动初始化-->
+            <number-box :maxVal="orderShow.stock_quantity"></number-box>
           </div>
           <div class="purBtn">
             <mt-button type="primary">立即购买</mt-button>
@@ -59,6 +51,8 @@
 
 <script>
 import swipe from "../subcomponents/Swipe.vue";
+// 导入“数字输入框”子组件numbox
+import numbox from "../subcomponents/GoodsInfoNumberBox.vue";
 export default {
   data() {
     return {
@@ -73,6 +67,7 @@ export default {
     this.getThumLunBo();
     this.getOrderDesc();
   },
+  // 手动初始化number box 数字输入框
   methods: {
     //  获取商品轮播图数组，需要经过处理，以适配Swipe中的item.img,直接拿到的数组对象里只有src属性，没有img属性
     getThumLunBo() {
@@ -96,6 +91,7 @@ export default {
   },
   components: {
     "image-swipe": swipe,
+    "number-box": numbox,
   },
 };
 </script>
@@ -123,8 +119,12 @@ export default {
       }
     }
     .purNum {
+      display: flex;
+      flex-direction: row;
       span {
         color: #666;
+        line-height: 35px;
+        margin-right: 5px;
       }
     }
     .purBtn {
@@ -141,8 +141,8 @@ export default {
     button.mint-button {
       width: 100%;
       margin-bottom: 10px;
-      &:last-child{
-          margin: 0;
+      &:last-child {
+        margin: 0;
       }
     }
   }
