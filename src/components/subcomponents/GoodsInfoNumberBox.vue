@@ -9,7 +9,14 @@
       <button class="mui-btn mui-btn-numbox-minus" type="button">
         -
       </button>
-      <input id="test" class="mui-input-numbox" type="number" value="1" />
+      <input
+        id="test"
+        class="mui-input-numbox"
+        type="number"
+        value="1"
+        ref="numbox"
+        @change="countChanged"
+      />
       <button class="mui-btn mui-btn-numbox-plus" type="button">
         +
       </button>
@@ -46,6 +53,15 @@ export default {
       mui(".mui-numbox")
         .numbox()
         .setOption("max", newVal);
+    },
+  },
+  // 手动初始化mui后，先监听父组件的传值maxVal，并使用mui API动态设置文本输入框最大值。还需要拿到文本输入框中的实时值(某件商品的件数)。
+  // 使用input 的change方法监听input中值的变化
+  methods: {
+    countChanged() {
+      // ref---this.$refs可以获取原生DOM对象
+      // 当前value值 this.$refs.numbox.value,需要传给父组件
+      this.$emit("getcount", this.$refs.numbox.value);
     },
   },
 };

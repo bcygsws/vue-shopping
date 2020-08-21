@@ -22,11 +22,17 @@
           <div class="purNum">
             <span>购买数量:</span>
             <!--使用mui中封装的组件 numbox.html，该组件需要手动初始化-->
-            <number-box :maxVal="orderShow.stock_quantity"></number-box>
+            <number-box
+              :maxVal="orderShow.stock_quantity"
+              @getcount="getSelectedCount"
+            ></number-box>
           </div>
           <div class="purBtn">
             <mt-button type="primary">立即购买</mt-button>
-            <mt-button type="danger">加入购物车</mt-button>
+            <!--文本输入框中最大值监听，动态设置后，实现'加入购物车'的点击事件-->
+            <mt-button type="danger" @click="addToShopcar"
+              >加入购物车</mt-button
+            >
           </div>
         </div>
       </div>
@@ -61,6 +67,8 @@ export default {
       goodsLunBo: [],
       // 订单详情展示数据对象
       orderShow: {},
+      // 默认购买件数为1，也恰好是文本输入框中设置的默认值
+      selectedCount: 1,
     };
   },
   created() {
@@ -87,6 +95,32 @@ export default {
         console.log(result.body.message);
         this.orderShow = result.body.message[0];
       });
+    },
+    // 获取子组件文本数字框中的实时件数
+    getSelectedCount(val) {
+      // 参数val就是子组件向本组件传递的实时件数
+      this.selectedCount = val;
+    },
+    // 点击加入购物车按钮，将选择好的商品加入购物车
+    addToShopcar() {
+      // 组织一个对象,存储即将加入购物车的【商品信息】
+      /* 
+         {
+          即将添加的商品id:this.goodsId,
+          即将添加的商品件数count:this.selectedCount,
+          即将添加的商品单价price：this.orderShow.sellprice
+          是否选中自动计算价格开关selected：true
+          }
+          然后，把这个数据保存到store的car中
+       */
+      var goodsinfo = {
+        id: this.goodsId,
+        count: this.selectedCount,
+        price: this.orderShow.sell_price,
+        selected: true,
+      };
+      // 本组件把数据移交给store中的mutations中方法进行全局管理，引用方式：this.$store.commit()
+      this.$store.commit("addToCar", goodsinfo);
     },
   },
   components: {

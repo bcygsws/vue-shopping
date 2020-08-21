@@ -104,6 +104,59 @@ import VuePreview from "vue-preview";
 Vue.use(VuePreview);
 // c.导入缩略图样式文件
 import "./lib/css/global.scss";
+
+// 任何组件都可以访问全局转态，任何组件也都可以修改全局状态，所有引用全局转态的视图都会响应这种改变，这就是vuex的功能
+// a.导包
+import Vuex from "vuex";
+// b.注册到vue实例
+Vue.use(Vuex);
+// c.实例化store状态管理对象
+// d.在vm实例中引入store
+
+// 注意Vuex的Store()方法，Store大写
+// 从本地存储localStorage中获取car数组
+var car = JSON.parse(localStorage.getItem("car") || "[]");
+var store = new Vuex.Store({
+  state: {
+    //作用：存放共享的数据，类似组件中的data。组件中引用方式this.$store.state.***
+    // car存放共享数据的数组对象
+    car: car,
+  },
+  mutations: {
+    // 提交状态修改。组件中引用方式：this.$store.commit(方法名，传递过来的参数，成为mutations方法的第二个参数，第一个参数一定是state)
+    addToCar(state, goodsinfo) {
+      // 点击【加入购物车按钮】需要购买的商品信息-存放于goodsinfo中，就会被提交到car数组中
+      /* 
+        分两种情况：
+        1.car中已经有将要提交的商品种类(id相同)，则需要将该种类的原有count和即将添加的count相加
+        2.car中没有将要提交的商品种类(要提交的id和car中的所有id都不相同)，直接push到car中即可
+      */
+      var flag = false;
+      state.car.some((item) => {
+        // 1.some方法找到条件满足的，就将结束遍历,此时原来car数组中，只有count键的值发生改变。若组件传入的goodsinfo中id都不能在car数组
+        // 对象中找到，需要为car数组push一个新元素goodsinfo
+        // 2.不能直接else分支来实现“car中没有将要提交的商品种类”。如：car数组中有[{id:1},{id:2}],而goodsinfo对象{id:2}，就会发生数组的覆盖
+        // 为此，增设一个flag标志，使得上面分析的两种情况彻底分开
+        if (item.id == goodsinfo.id) {
+          item.count += goodsinfo.count;
+          flag = true;
+        }
+        // else {
+        //   state.car.push(goodsinfo);
+        // }
+        return true;
+      });
+      // 第二种情况
+      if (!flag) {
+        state.car.push(goodsinfo);
+      }
+      // 上面的操作都改变了car值：分别是改变了car的count键值和元素个数
+      localStorage.setItem("car", JSON.stringify(state.car));
+    },
+  },
+  getters: {},
+});
+
 var vm = new Vue({
   el: "#app",
   data: {},
@@ -113,5 +166,7 @@ var vm = new Vue({
   },
   // 路由组件要挂载在vm实例中
   router,
+  // 装载状态管理对象
+  store,
 });
 console.log(vm);
