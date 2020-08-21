@@ -132,8 +132,11 @@ export default {
 
 <style lang="less" scoped>
 .goodsinfo_container {
+  padding: 10px 0;
   background-color: #efeff4;
-  padding: 1px 0;
+  .mui-card{
+    margin-top:0;
+  }
   .mui-card-content-inner {
     > div {
       margin-bottom: 10px;

@@ -36,11 +36,12 @@ import "./lib/mui/js/mui.min.js";
 //使用vue-lazyload包实现懒加载
 import VueLazyLoad from "vue-lazyload";
 Vue.use(VueLazyLoad);
-import { Header, Swipe, SwipeItem, Button } from "mint-ui";
+import { Header, Swipe, SwipeItem, Button, Switch } from "mint-ui";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Button.name, Button);
+Vue.component(Switch.name, Switch);
 // a.使用图片懒加载技术---但是懒加载不起作用。解决办法：全局导入mint-ui包，而不是按需导入
 // import { Lazyload } from "mint-ui";
 // Vue.use(Lazyload);

@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- <div
-      class="mui-numbox"
-      data-numbox-min="1"
-      :data-numbox-max="orderShow.stock_quantity"
-    > -->
     <div class="mui-numbox" data-numbox-min="1">
       <button class="mui-btn mui-btn-numbox-minus" type="button">
         -
@@ -13,7 +8,7 @@
         id="test"
         class="mui-input-numbox"
         type="number"
-        value="1"
+        :value="curVal"
         ref="numbox"
         @change="countChanged"
       />
@@ -29,7 +24,7 @@
 import mui from "../../lib/mui/js/mui.min.js";
 export default {
   // curVal是购物车订单Shopping.vue中传入的当前值
-  props: ["maxVal", "curVal"],
+  props: ["curVal"],
   mounted() {
     mui(".mui-numbox").numbox();
     // 获取父组件goodsinfo传递过来的库存量，即数字输入框的最大值
@@ -46,23 +41,13 @@ export default {
     */
     console.log(this.maxVal); //undefined
   },
-  watch: {
-    //这个maxVal是props中接收的属性
-    maxVal: function(newVal, oldVal) {
-      //使用mui官方文档中mui的API来设置max的值
-      //setOptions(options) 可取值: min(Int),step(Int),max(Int),下面的max是指文本输入框的最大值，这是固定写法，注意和监控属性max的区别
-      mui(".mui-numbox")
-        .numbox()
-        .setOption("max", newVal);
-    },
-  },
   // 手动初始化mui后，先监听父组件的传值maxVal，并使用mui API动态设置文本输入框最大值。还需要拿到文本输入框中的实时值(某件商品的件数)。
   // 使用input 的change方法监听input中值的变化
   methods: {
     countChanged() {
       // ref---this.$refs可以获取原生DOM对象
       // 当前value值 this.$refs.numbox.value,需要传给父组件
-      this.$emit("getcount", this.$refs.numbox.value);
+      // this.$emit("getcount", this.$refs.numbox.value);
     },
   },
 };
