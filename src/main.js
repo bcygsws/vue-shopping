@@ -141,11 +141,12 @@ var store = new Vuex.Store({
         if (item.id == goodsinfo.id) {
           item.count += parseInt(goodsinfo.count);
           flag = true;
+          // 注意return true直接放在条件判断{}内
+          return true;
         }
         // else {
         //   state.car.push(goodsinfo);
         // }
-        return true;
       });
       // 第二种情况
       if (!flag) {
@@ -159,13 +160,37 @@ var store = new Vuex.Store({
       state.car.some((item, index) => {
         if (id == item.id) {
           state.car.splice(index, 1);
+          return true;
         }
-        return true;
       });
       // car发生变化，同步到本地存储
       localStorage.setItem("car", JSON.stringify(state.car));
     },
+    // 购物车中的switch开关的打开与关闭状态
+    updateCarSelected(state, obj) {
+      state.car.some((item) => {
+        if (obj.id == item.id) {
+          // 将obj对象中selected键存储的switch开关当前值赋给car数组
+          item.selected = obj.selected;
+          return true;
+        }
+      });
+      // car数组某个id的开关状态发生改变，同步到本地存储。注意：会影响【结算区】结果
+      localStorage.setItem("car", JSON.stringify(state.car));
+    },
+    // 在购物车列表中，点击 + - 甚至直接改变【数字输入框中的值】都将影响到car数组
+    updateSelectedCount(state, obj) {
+      state.car.some((item) => {
+        if (obj.id == item.id) {
+          item.count = parseInt(obj.count);
+          return true;
+        }
+      });
+      // 转态管理变量car值发生改变,同步到本地
+      localStorage.setItem("car", JSON.stringify(state.car));
+    },
   },
+  // getters类似于组件中的computed属性，是对属性值一种监听。在购物车列表凡是可能发生改变的属性值，都要使用getters中方法得到
   getters: {
     // 获取购物车中商品的件数,返回一个键为商品种类id的对象，其值为该种类商品的件数{商品种类id:该种类要购买的总件数count}
     getGoodsCount(state) {
@@ -190,8 +215,11 @@ var store = new Vuex.Store({
       var count = 0,
         total = 0;
       state.car.forEach((item) => {
-        count += parseInt(item.count);
-        total += parseInt(item.count) * parseFloat(item.price);
+        // 注意：switch的开关状态会影响结算区，只有当该商品的switch为打开状态时，才计入勾选的商品件数和总检
+        if (item.selected) {
+          count += parseInt(item.count);
+          total += parseInt(item.count) * parseFloat(item.price);
+        }
       });
       obj["count"] = count;
       obj["total"] = total;

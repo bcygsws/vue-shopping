@@ -6,9 +6,15 @@
       <div class="mui-card" v-for="(item, i) in orderList" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
-            <!--Switch组件 mint-ui-->
+            <!--Switch组件 mint-ui组件，状态改变@change事件-->
             <mt-switch
               v-model="$store.getters.getGoodsSelected[item.id]"
+              @change="
+                changeSelected(
+                  item.id,
+                  $store.getters.getGoodsSelected[item.id]
+                )
+              "
             ></mt-switch>
             <img :src="item.thumb_path" alt="" />
             <dl>
@@ -18,8 +24,9 @@
                 <!--子组件 数字输入框,父组件向子组件传值-->
                 <num-box
                   :curVal="$store.getters.getGoodsCount[item.id]"
+                  :goodsid="item.id"
                 ></num-box>
-                <!--删除功能做以下两点：1.该条目从orderList数组中删除，从而重新渲染的购物列表中没有这条数据
+                <!--a链接点击@click事件，修饰符prevent来阻止默认行为。删除功能做以下两点：1.该条目从orderList数组中删除，从而重新渲染的购物列表中没有这条数据
                 2.向mutations提交一个修改请求，把该条数据从状态仓库数据state中删除-->
                 <a href="javascript:;" @click.prevent="removeItem(item.id, i)"
                   >删除</a
@@ -74,18 +81,14 @@ export default {
         idArr.push(item.id);
       });
       //
-      idArr.forEach((item, index) => {
-        this.$http.get("api/goods/getshopcarlist/" + item).then((result) => {
+      this.$http
+        .get("api/goods/getshopcarlist/" + idArr.join(","))
+        .then((result) => {
           if (result.status == 200) {
             // console.log(result.body.message);
-            var orientInfo = result.body.message[0];
-            this.orderList.push(orientInfo);
+            this.orderList = result.body.message;
           }
         });
-      });
-      // 拿到购物车中列表渲染的数组---[{cou: 1, id: 87, title: "华为（HUAWEI）荣耀6Plus 16G双4G版", sell_price: 2195,…}]
-      // 这个数组主要用于渲染一些不变的数据，比如id、title、sell_price等等。购物车列表条目中的可以改变的状态，从store仓库中getters中获取
-      console.log(this.orderList);
     },
     // 做两件事：1.将条目从数组orderList中删除，以使得本页面重新渲染，使得删除的该条目消失
     // 2.向mutations提交一个修改方法和参数，使得状态仓库中该id的数据也同步清除
@@ -95,6 +98,18 @@ export default {
       // 提交一个状态修改请求
       this.$store.commit("removeShopcarItem", id);
     },
+    // 更改购物车列表中的switch开关状态。将影响【结算区】的“勾选商品的总件数”以及“商品总价”
+    /* 
+    参数id:是使得哪个id商品的状态发生改变？
+    参数switchVal:是v-model的当前值。对于switch开关打开为true,关闭为false。v-model属性值$store.getters.getGoodsSelected[item.id]这个值随之发生变化
+     */
+    changeSelected(id, switchVal) {
+      console.log(id, switchVal); //将switch开关关闭后，输出值变成了 88 false
+      // 同样地，这个修改影响全局状态。向store状态管理仓库提交这个更改
+      //提交的是对象{ id: id, selected: switchVal }
+      this.$store.commit("updateCarSelected", { id: id, selected: switchVal });
+    },
+    // 点击数字输入框中的+ - 甚至更改输入框中的值导致car中count值发生改变，可以在ShopCarNumberbox.vue子组件中进行处理
   },
   components: {
     "num-box": numberbox,

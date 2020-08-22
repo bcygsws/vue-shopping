@@ -4,6 +4,7 @@
       <button class="mui-btn mui-btn-numbox-minus" type="button">
         -
       </button>
+      <!-- 点击购物车列表中的+、-和更改值，实质都是value属性值发生改变，用@change事件监听 -->
       <input
         id="test"
         class="mui-input-numbox"
@@ -24,7 +25,7 @@
 import mui from "../../lib/mui/js/mui.min.js";
 export default {
   // curVal是购物车订单Shopping.vue中传入的当前值
-  props: ["curVal"],
+  props: ["curVal", "goodsid"],
   mounted() {
     mui(".mui-numbox").numbox();
     // 获取父组件goodsinfo传递过来的库存量，即数字输入框的最大值
@@ -45,9 +46,12 @@ export default {
   // 使用input 的change方法监听input中值的变化
   methods: {
     countChanged() {
-      // ref---this.$refs可以获取原生DOM对象
-      // 当前value值 this.$refs.numbox.value,需要传给父组件
-      // this.$emit("getcount", this.$refs.numbox.value);
+      // 向store仓库提交count状态改变的请求
+      this.$store.commit("updateSelectedCount", {
+        id: this.goodsid,
+        // 注意：count值不能使用this.curVal，这个值由父组件传递而来，子组件无权更改。子组件可以通过 原生对象value属性的方式获取当前值
+        count: this.$refs.numbox.value,
+      });
     },
   },
 };

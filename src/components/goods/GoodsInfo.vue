@@ -1,6 +1,18 @@
 <template>
   <div class="goodsinfo_container">
     <!-- <h3>这是商品详情页</h3> -->
+    <!--【添加购物车】按钮点击时，小球飞向购物车动画
+    vue实现动画的三种方式：1.v-enter v-enter-active 6个类，transition设置name数值，name属性值代替默认的v
+    2.animate.css 结合enter-active-class和leave-active-class类样式
+    3.使用钩子函数，本例中是半场动画，采用钩子函数
+    -->
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @afterEnter="afterEnter"
+    >
+      <div class="ball" v-show="ballFlag" ref="ball"></div>
+    </transition>
     <!-- 商品详情页轮播图子组件 -->
     <!-- 使用mui 的card.html中的组件 -->
     <div class="mui-card">
@@ -69,6 +81,8 @@ export default {
       orderShow: {},
       // 默认购买件数为1，也恰好是文本输入框中设置的默认值
       selectedCount: 1,
+      // 购物车小球动画的显示/隐藏状态
+      ballFlag: false,
     };
   },
   created() {
@@ -103,6 +117,8 @@ export default {
     },
     // 点击加入购物车按钮，将选择好的商品加入购物车
     addToShopcar() {
+      // 点击【添加到购物车】，购物车小球弹出显示
+      this.ballFlag = !this.ballFlag;
       // 组织一个对象,存储即将加入购物车的【商品信息】
       /* 
          {
@@ -122,6 +138,30 @@ export default {
       // 本组件把数据移交给store中的mutations中方法进行全局管理，引用方式：this.$store.commit()
       this.$store.commit("addToCar", goodsinfo);
     },
+    // 动画钩子函数
+    beforeEnter(el) {
+      el.style.transform = "translate(0,0)";
+    },
+    enter(el, done) {
+      // 下面语句必须加上，否则没有动画效果
+      el.offsetWidth;
+      // 原生对象.getBoundingClientRect()用于获取某个元素相对于视窗的位置集合，IE5就开始支持此方法了
+      // a.获取徽标距离视窗的位置集合
+      const badgePosition = document
+        .getElementById("badge")
+        .getBoundingClientRect();
+      // b.获取徽标距离视窗的位置集合
+      const ballPosition = this.$refs.ball.getBoundingClientRect();
+      // c.小球从数字输入框到徽标的横向和纵向位移距离x、y，使得小球到达徽标位置
+      const x = badgePosition.left - ballPosition.left;
+      const y = badgePosition.top - ballPosition.top;
+      el.style.transform = `translate(${x}px,${y}px)`;
+      // d.设置过渡的时间和方式
+      el.style.transition = "all 3s cubic-bezier(.4,-0.3,1,.68)";
+      // 调用afterEnter(),类似回调函数
+      done();
+    },
+    afterEnter() {},
   },
   components: {
     "image-swipe": swipe,
@@ -132,10 +172,11 @@ export default {
 
 <style lang="less" scoped>
 .goodsinfo_container {
-  padding: 10px 0;
   background-color: #efeff4;
-  .mui-card{
-    margin-top:0;
+  position: relative;
+  overflow: hidden;
+  .mui-card {
+    margin-top: 0;
   }
   .mui-card-content-inner {
     > div {
@@ -182,6 +223,17 @@ export default {
         margin: 0;
       }
     }
+  }
+  /* 小球动画 */
+  .ball {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #e92313;
+    position: absolute;
+    left: 142px;
+    top: 351px;
+    z-index: 99;
   }
 }
 </style>
