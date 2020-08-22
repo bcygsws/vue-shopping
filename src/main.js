@@ -154,6 +154,17 @@ var store = new Vuex.Store({
       // 上面的操作都改变了car值：分别是改变了car的count键值和元素个数
       localStorage.setItem("car", JSON.stringify(state.car));
     },
+    //点击购物车页面中【删除】按钮，需要将该id所对应的条目从car中删除，并同步到本地存储localStorage中
+    removeShopcarItem(state, id) {
+      state.car.some((item, index) => {
+        if (id == item.id) {
+          state.car.splice(index, 1);
+        }
+        return true;
+      });
+      // car发生变化，同步到本地存储
+      localStorage.setItem("car", JSON.stringify(state.car));
+    },
   },
   getters: {
     // 获取购物车中商品的件数,返回一个键为商品种类id的对象，其值为该种类商品的件数{商品种类id:该种类要购买的总件数count}

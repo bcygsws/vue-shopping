@@ -3,7 +3,7 @@
     <!--<h1>这是购物组件</h1>-->
     <div class="pur_list">
       <!-- 使用mui card.html中组件 -->
-      <div class="mui-card" v-for="item in orderList" :key="item.id">
+      <div class="mui-card" v-for="(item, i) in orderList" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
             <!--Switch组件 mint-ui-->
@@ -19,7 +19,11 @@
                 <num-box
                   :curVal="$store.getters.getGoodsCount[item.id]"
                 ></num-box>
-                <a>删除</a>
+                <!--删除功能做以下两点：1.该条目从orderList数组中删除，从而重新渲染的购物列表中没有这条数据
+                2.向mutations提交一个修改请求，把该条数据从状态仓库数据state中删除-->
+                <a href="javascript:;" @click.prevent="removeItem(item.id, i)"
+                  >删除</a
+                >
               </dd>
             </dl>
           </div>
@@ -34,7 +38,10 @@
               <dd>
                 已勾选商品件数：<span>{{
                   $store.getters.getGoodsCountAndTotal["count"]
-                }}</span>件，总价<span>￥{{ $store.getters.getGoodsCountAndTotal["total"] }}</span>
+                }}</span
+                >件，总价<span
+                  >￥{{ $store.getters.getGoodsCountAndTotal["total"] }}</span
+                >
               </dd>
             </dl>
             <mt-button type="danger">去结算</mt-button>
@@ -79,6 +86,14 @@ export default {
       // 拿到购物车中列表渲染的数组---[{cou: 1, id: 87, title: "华为（HUAWEI）荣耀6Plus 16G双4G版", sell_price: 2195,…}]
       // 这个数组主要用于渲染一些不变的数据，比如id、title、sell_price等等。购物车列表条目中的可以改变的状态，从store仓库中getters中获取
       console.log(this.orderList);
+    },
+    // 做两件事：1.将条目从数组orderList中删除，以使得本页面重新渲染，使得删除的该条目消失
+    // 2.向mutations提交一个修改方法和参数，使得状态仓库中该id的数据也同步清除
+    removeItem(id, index) {
+      // 从本页面渲染数组中清除该id所在条目的内容
+      this.orderList.splice(index, 1);
+      // 提交一个状态修改请求
+      this.$store.commit("removeShopcarItem", id);
     },
   },
   components: {
@@ -138,14 +153,14 @@ export default {
             margin: 0;
             font-weight: 400;
           }
-          dd{
-            span{
+          dd {
+            span {
               color: #e92312;
               font-size: 16px;
             }
           }
         }
-        .mint-button{
+        .mint-button {
           height: 35px;
           font-size: 16px;
         }
