@@ -139,7 +139,7 @@ var store = new Vuex.Store({
         // 2.不能直接else分支来实现“car中没有将要提交的商品种类”。如：car数组中有[{id:1},{id:2}],而goodsinfo对象{id:2}，就会发生数组的覆盖
         // 为此，增设一个flag标志，使得上面分析的两种情况彻底分开
         if (item.id == goodsinfo.id) {
-          item.count += goodsinfo.count;
+          item.count += parseInt(goodsinfo.count);
           flag = true;
         }
         // else {
@@ -155,7 +155,38 @@ var store = new Vuex.Store({
       localStorage.setItem("car", JSON.stringify(state.car));
     },
   },
-  getters: {},
+  getters: {
+    // 获取购物车中商品的件数,返回一个键为商品种类id的对象，其值为该种类商品的件数{商品种类id:该种类要购买的总件数count}
+    getGoodsCount(state) {
+      //在Shopping.vue中调用this.$store.getters.getGoodsCount[item.id]就可以拿到总件数
+      var obj = {};
+      state.car.forEach((item) => {
+        obj[item.id] = item.count;
+      });
+      return obj;
+    },
+    // 获取购物车中商品switch开关的状态，方式同上
+    getGoodsSelected(state) {
+      var obj = {};
+      state.car.forEach((item) => {
+        obj[item.id] = item.selected;
+      });
+      return obj;
+    },
+    // 获取购物车列表商品已经勾选的商品总件数和商品总价
+    getGoodsCountAndTotal(state) {
+      var obj = {};
+      var count = 0,
+        total = 0;
+      state.car.forEach((item) => {
+        count += parseInt(item.count);
+        total += parseInt(item.count) * parseFloat(item.price);
+      });
+      obj["count"] = count;
+      obj["total"] = total;
+      return obj;
+    },
+  },
 });
 
 var vm = new Vue({

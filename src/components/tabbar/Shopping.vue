@@ -7,17 +7,37 @@
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
             <!--Switch组件 mint-ui-->
-            <mt-switch v-model="item.selected"></mt-switch>
-            <img :src="item.src" alt="" />
+            <mt-switch
+              v-model="$store.getters.getGoodsSelected[item.id]"
+            ></mt-switch>
+            <img :src="item.thumb_path" alt="" />
             <dl>
               <dt>{{ item.title }}</dt>
               <dd>
-                <span>￥{{ item.price }}</span>
+                <span>￥{{ item.sell_price }}</span>
                 <!--子组件 数字输入框,父组件向子组件传值-->
-                <num-box :curVal="item.count"></num-box>
+                <num-box
+                  :curVal="$store.getters.getGoodsCount[item.id]"
+                ></num-box>
                 <a>删除</a>
               </dd>
             </dl>
+          </div>
+        </div>
+      </div>
+      <!--商品结算信息展示-->
+      <div class="mui-card">
+        <div class="mui-card-content">
+          <div class="mui-card-content-inner mui-computed">
+            <dl>
+              <dt>总计（不含运费）</dt>
+              <dd>
+                已勾选商品件数：<span>{{
+                  $store.getters.getGoodsCountAndTotal["count"]
+                }}</span>件，总价<span>￥{{ $store.getters.getGoodsCountAndTotal["total"] }}</span>
+              </dd>
+            </dl>
+            <mt-button type="danger">去结算</mt-button>
           </div>
         </div>
       </div>
@@ -35,6 +55,9 @@ export default {
       orderList: [],
     };
   },
+  created() {
+    this.getOrderInfo();
+  },
   methods: {
     // 根据car中商品id获取商品的一些信息，部分信息需要根据id获取
     getOrderInfo() {
@@ -47,27 +70,16 @@ export default {
       idArr.forEach((item, index) => {
         this.$http.get("api/goods/getshopcarlist/" + item).then((result) => {
           if (result.status == 200) {
-            console.log(result.body.message);
+            // console.log(result.body.message);
             var orientInfo = result.body.message[0];
-            // 组织一个对象，包含购物车列表中的一个条目的所有信息
-            var obj = {
-              // 表明唯一身份的id,删除的时候用到
-              id: item,
-              selected: this.$store.state.car[index].selected,
-              src: orientInfo.thumb_path,
-              title: orientInfo.title,
-              price: orientInfo.sell_price,
-              count: this.$store.state.car[index].count,
-            };
-            this.orderList.push(obj);
+            this.orderList.push(orientInfo);
           }
         });
       });
+      // 拿到购物车中列表渲染的数组---[{cou: 1, id: 87, title: "华为（HUAWEI）荣耀6Plus 16G双4G版", sell_price: 2195,…}]
+      // 这个数组主要用于渲染一些不变的数据，比如id、title、sell_price等等。购物车列表条目中的可以改变的状态，从store仓库中getters中获取
+      console.log(this.orderList);
     },
-  },
-  created() {
-    console.log(this.car);
-    this.getOrderInfo();
   },
   components: {
     "num-box": numberbox,
@@ -111,13 +123,31 @@ export default {
               align-items: center;
               /* 让价格标签、数字输入框、删除标签居中 */
               line-height: 33px;
-              >span{
-                  font-size: 16px;
-                  color: #e92312;
-                  font-weight: 700;
+              > span {
+                font-size: 16px;
+                color: #e92312;
+                font-weight: 700;
               }
             }
           }
+        }
+      }
+      .mui-computed {
+        dl {
+          dt {
+            margin: 0;
+            font-weight: 400;
+          }
+          dd{
+            span{
+              color: #e92312;
+              font-size: 16px;
+            }
+          }
+        }
+        .mint-button{
+          height: 35px;
+          font-size: 16px;
         }
       }
     }
