@@ -161,7 +161,9 @@ export default {
       // 调用afterEnter(),类似回调函数
       done();
     },
-    afterEnter() {},
+    afterEnter() {
+      this.ballFlag = !this.ballFlag;
+    },
   },
   components: {
     "image-swipe": swipe,

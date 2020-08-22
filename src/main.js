@@ -225,6 +225,18 @@ var store = new Vuex.Store({
       obj["total"] = total;
       return obj;
     },
+    // 获取购物车中商品件数
+    /* 
+    this.$store.getters.getGoodsCountAndTotal['count']获取的是结算区，勾选上的商品总件数
+    this.$store.getters.getAllGoodsCount 则获取的是购物车列表中商品的总件数（不管是否勾选，只要在购物车列表中，就要包括）
+    */
+    getAllGoodsCount(state) {
+      var c = 0;
+      state.car.forEach((item) => {
+        c += parseInt(item.count);
+      });
+      return c;
+    },
   },
 });
 
