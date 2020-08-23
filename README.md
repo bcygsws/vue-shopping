@@ -5,7 +5,7 @@
 ### 主页的设计
 
 - 主页的头部栏 header（使用 mint-ui 组件）和切换栏 tabbar（使用 mui 组件）的样式设计
-- tabbar 栏的功能切换
+- tabbar 栏的功能切换-nav
   - 在 router.js 中定义路由自带的排他性样式，通过 linkActiveClass 属性设置
   - 设置为 mui-class,覆盖掉第一个 router-link 中的默认定义
   - 删除第一个 router-link 中的默认的 class="mui-active",以避免出现选中两个路由按钮的情况
@@ -51,6 +51,11 @@
       - 为提升用户体验，在购物车详情页，为“点击【加入购物车】按钮到 tabbar 徽标这一过程，添加一个动画”，让小球从商品详情页的文本输入框弹出，最终落到 tabbar 徽标上，然后消失。需要用到原生对象.getBoundingClientRect()方法获取元素相对于视口的位置集合。
       - 该动画是一个半场动画，不能使用 v-enter v-enter-to 等类样式来实现，采用动画钩子函数：@beforeEnter、@enter、@afterEnter
         来处理
+
+- 顶部固定栏-header
+  - 在顶部固定栏上添加一个返回按钮，v-show="flag"。a.flag 值控制其显示/隐藏;b.编程式导航，来控制页面的层层返回
+  - 主页/home 在整个应用的最前面，不能再返回。即：让路由为'/home'时，【返回】按钮隐藏，路由为非'/home'时，在 app 组件中使用 watch 属性监控\$route.path 属性，来给 flag 赋值(true 或 false)
+  - 但是，即使应用处于非'/home'页面时，刷新页面后，即使 watch 监听中为 flag 赋值为 true,这个值将销毁，使得 flag 值重置为默认的 false。为此需在 app 组件中采用生命周期钩子 created,判断 this.\$route.path=='/home':false:true;
 
 # 这是一个项目
 
