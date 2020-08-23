@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="home_container">
     <!-- <h1>这是home组件</h1> -->
     <!-- home主页内的轮播图 -->
     <!-- <mt-swipe :auto="4000">
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container{
+.home_container{
 .mui-grid-view{
   background-color: #fff;
     li.mui-media{

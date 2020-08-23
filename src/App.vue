@@ -1,6 +1,10 @@
 <template>
-  <div class="container">
-    <mt-header fixed title="学无止境-网课随心购"></mt-header>
+  <div class="app_container">
+    <mt-header fixed title="学无止境-网课随心购">
+      <span slot="left" v-show="flag" @click="goBack">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
     <!-- <h1>这是App组件</h1> -->
     <!-- 这是tabbar按钮 -->
     <nav class="mui-bar mui-bar-tab">
@@ -33,14 +37,47 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      // 返回按钮的标志位，主页App.vue是最前面的页面，默认将“返回”隐藏
+      flag: false,
+    };
+  },
+  methods: {
+    goBack() {
+      // 点击一次页面中“后退”按钮，返回到上一次，即：go(-1)
+      this.$router.go(-1);
+    },
+  },
+  // watch属性监控路由地址的变化，以确定【返回】按钮的显示或隐藏，当路由地址为："/home"表示在home主页，【返回】按钮应隐藏
+  // 在其他非"/home"路由时，按钮都应该隐藏
+  /* bug:但是即使在非'/home'路由页面，当这些页面刷新时，浏览器都会重绘App.vue页面。flag变量值在watch属性中即使设定flag=true值将会销毁，flag变为默认值false,【返回】按钮
+     也将消失，为此使用生命周期钩子。App.vue初始化时，在生命周期钩子created也同样做一个判断，如是非'/home'路由，当页面重绘时，将其flag值
+     手动改成true
+   */
+  created() {
+    this.flag = this.$route.path == "/home" ? false : true;
+  },
+  watch: {
+    "$route.path": function(newVal) {
+      if (newVal == "/home") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.app_container {
   padding-top: 40px;
   padding-bottom: 50px;
+  /* 图片列表页向上卷曲时，由于该页面中顶部滑动栏也采用了定位，而且是在顶部固定栏header后面定义的，会压在header上面，因此需手动提高
+     header的层级
+   */
+  .mint-header {
+    z-index: 99;
+  }
 }
 .mui-bar .mui-icon-extra {
   font-size: 24px;
