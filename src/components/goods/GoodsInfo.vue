@@ -144,6 +144,8 @@ export default {
     },
     enter(el, done) {
       // 下面语句必须加上，否则没有动画效果
+      // 原因在于在vue中（在原生js中也一样），el.style.……定义样式，浏览器不会自动更新的。添加el.offsetWidth,其目的是触发浏览器
+      // 重绘，让小球动画显示出来
       el.offsetWidth;
       // 原生对象.getBoundingClientRect()用于获取某个元素相对于视窗的位置集合，IE5就开始支持此方法了
       // a.获取徽标距离视窗的位置集合
