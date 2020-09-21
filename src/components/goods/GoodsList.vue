@@ -78,7 +78,7 @@ export default {
         .get("api/getgoods?pageindex=" + this.pageindex)
         .then((result) => {
           if (result.status == 200) {
-            // console.log(result.body.message);
+            console.log(result.body.message);
             this.goodsData = this.goodsData.concat(result.body.message);
           } else {
             Toast("加载商品列表失败……");
