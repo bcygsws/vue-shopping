@@ -25,7 +25,7 @@
 import mui from "../../lib/mui/js/mui.min.js";
 export default {
   // curVal是购物车订单Shopping.vue中传入的当前值
-  props: ["curVal", "goodsid"],
+  props: ["curVal", "goodsId"],
   mounted() {
     mui(".mui-numbox").numbox();
     // 获取父组件goodsinfo传递过来的库存量，即数字输入框的最大值
@@ -48,7 +48,7 @@ export default {
     countChanged() {
       // 向store仓库提交count状态改变的请求
       this.$store.commit("updateSelectedCount", {
-        id: this.goodsid,
+        id: this.goodsId,
         // 注意：count值不能使用this.curVal，这个值由父组件传递而来，子组件无权更改。子组件可以通过 原生对象value属性的方式获取当前值
         count: this.$refs.numbox.value,
       });

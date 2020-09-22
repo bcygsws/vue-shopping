@@ -24,7 +24,7 @@
                 <!--子组件 数字输入框,父组件向子组件传值-->
                 <num-box
                   :curVal="$store.getters.getGoodsCount[item.id]"
-                  :goodsid="item.id"
+                  :goodsId="item.id"
                 ></num-box>
                 <!--a链接点击@click事件，修饰符prevent来阻止默认行为。删除功能做以下两点：1.该条目从orderList数组中删除，从而重新渲染的购物列表中没有这条数据
                 2.向mutations提交一个修改请求，把该条数据从状态仓库数据state中删除-->
