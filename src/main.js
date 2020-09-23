@@ -237,6 +237,14 @@ var store = new Vuex.Store({
 			});
 			return c;
 		},
+		// 购物车列表页面数字输入框获取某类商品的库存量
+		getAllGoodsQuantity(state) {
+			var obj = {};
+			state.car.forEach(item => {
+				obj[item.id] = item.max;
+			});
+			return obj;
+		},
 	},
 });
 

@@ -30,7 +30,7 @@
 					<div class="purNum">
 						<span>购买数量:</span>
 						<!--使用mui中封装的组件 numbox.html，该组件需要手动初始化-->
-						<number-box :maxVal="orderShow.stock_quantity" @getcount="getSelectedCount"></number-box>
+						<number-box :maxVal="orderShow.stock_quantity" @getCount="getSelectedCount"></number-box>
 					</div>
 					<div class="purBtn">
 						<mt-button type="primary">立即购买</mt-button>
@@ -75,6 +75,7 @@ export default {
 			selectedCount: 1,
 			// 购物车小球动画的显示/隐藏状态
 			ballFlag: false,
+			//
 		};
 	},
 	created() {
@@ -105,6 +106,7 @@ export default {
 		},
 		// 获取子组件文本数字框中的实时件数
 		getSelectedCount(val) {
+			console.log('子组件向父组件传递商品总件数：' + val);
 			// 参数val就是子组件向本组件传递的实时件数
 			this.selectedCount = val;
 		},
@@ -117,7 +119,8 @@ export default {
          {
           即将添加的商品id:this.goodsId,
           即将添加的商品件数count:this.selectedCount,
-          即将添加的商品单价price：this.orderShow.sellprice
+					即将添加的商品单价price：this.orderShow.sellprice
+					商品的库存量,即最大值：this.orderShow.stock_quantity,
           是否选中自动计算价格开关selected：true
           }
           然后，把这个数据保存到store的car中
@@ -126,6 +129,7 @@ export default {
 				id: this.goodsId,
 				count: this.selectedCount,
 				price: this.orderShow.sell_price,
+				max: this.orderShow.stock_quantity,
 				selected: true,
 			};
 			// 本组件把数据移交给store中的mutations中方法进行全局管理，引用方式：this.$store.commit()

@@ -58,7 +58,7 @@ export default {
 			// ref---this.$refs可以获取原生DOM对象
 			// 当前value值 this.$refs.numbox.value,需要传给父组件
 			// console.log(this.$refs.numbox.value);
-			this.$emit('getcount', this.$refs.numbox.value);
+			this.$emit('getCount', this.$refs.numbox.value);
 		},
 	},
 };
