@@ -74,6 +74,8 @@ export default {
 .app_container {
 	padding-top: 40px;
 	padding-bottom: 50px;
+	/* 限制界面x方向的滚动，避免出现横向滚动条；只允许纵向的滚动条 */
+	overflow-x: hidden;
 	/* 图片列表页向上卷曲时，由于该页面中顶部滑动栏也采用了定位，而且是在顶部固定栏header后面定义的，会压在header上面，因此需手动提高
      header的层级
    */
