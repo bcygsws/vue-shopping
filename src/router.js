@@ -13,6 +13,7 @@ import photoinfo from './components/photos/PhotoInfo.vue';
 import goodslist from './components/goods/GoodsList.vue';
 import goodsinfo from './components/goods/GoodsInfo.vue';
 import goodsdesc from './components/goods/GoodsDesc.vue';
+import goodscomment from './components/goods/GoodsComment.vue';
 var router = new VueRouter({
 	routes: [
 		{
@@ -64,6 +65,11 @@ var router = new VueRouter({
 			name: 'info',
 			path: '/home/goodsinfo/:id',
 			component: goodsinfo,
+		},
+		{
+			name: 'comment',
+			path: '/home/goodscomment/:id',
+			component: goodscomment,
 		},
 	],
 	// 在VueRouter对象中，和routes并列的属性，还有一个linkActiveClass。该属性不设置的时候，路由选中的时候，路由配置好将添加一个默认的排他的router-link-active属性。而一旦设置linkActiveClass为其他值，router-link-active将不复存在，取而代之的是设定值，本例中是mui-active
