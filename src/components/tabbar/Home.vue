@@ -63,7 +63,11 @@ import swipe from "../subcomponents/Swipe.vue";
 export default {
   data() {
     return {
-      lunboList: [],
+      lunboList: [
+        {id:1,img:'../../images/lunbo-alt1.jpg',url:'asdfaffa'},
+        {id:2,img:'../../images/lunbo-alt2.jpg',url:'asdfaffa'},
+        {id:3,img:'../../images/lunbo-alt3.jpg',url:'asdfaffa'}
+      ],
     };
   },
   // 获取生命周期
@@ -75,7 +79,7 @@ export default {
       this.$http.get("api/getlunbo").then((result) => {
         if (result.status == 200) {
           console.log(result.body.message);
-          this.lunboList = result.body.message;
+          // this.lunboList = result.body.message;
         } else {
           // 请求失败---使用Toast组件提示加载失败
           Toast("加载图片失败……");

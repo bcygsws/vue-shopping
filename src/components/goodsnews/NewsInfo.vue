@@ -8,7 +8,7 @@
     </div>
     <!--内容区-->
     <p v-html="listinfo.content"></p>
-    <comment :listid="id"></comment>
+    <comment :listId="id"></comment>
   </div>
 </template>
 

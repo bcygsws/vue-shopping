@@ -18,7 +18,7 @@
     </div>
     <div class="content" v-html="imgInfo.content"></div>
     <!--评论列表-->
-    <cmt-box :listid="imgId"></cmt-box>
+    <cmt-box :listId="imgId"></cmt-box>
   </div>
 </template>
 

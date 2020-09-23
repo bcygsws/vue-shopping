@@ -38,15 +38,15 @@ export default {
     };
   },
   // 从newsinfo父组件中获取id值，给子组件comment
-  props: ["listid"],
+  props: ["listId"],
 
   methods: {
     // 获取评论列表
     getCommentList() {
       this.$http
         // 将pageIndex值用变量表示，当点击【加载更多】按钮时，使得pageIndex值发生变化
-        // .get("api/getcomments/" + this.listid + "?pageindex=1")
-        .get("api/getcomments/" + this.listid + "?pageindex=" + this.pageIndex)
+        // .get("api/getcomments/" + this.listId + "?pageindex=1")
+        .get("api/getcomments/" + this.listId + "?pageindex=" + this.pageIndex)
         .then((result) => {
           if (result.status == 200) {
             console.log(result.body.message);
@@ -77,7 +77,7 @@ export default {
       注意：trim()方法的作用是去除字符串前面和后面的空白字符
        */
       this.$http
-        .post("api/postcomment/" + this.listid, { content: this.msg.trim() })
+        .post("api/postcomment/" + this.listId, { content: this.msg.trim() })
         .then((result) => {
           // 其他地方引用数据接口是，result.status==200，表示获取到了数据；此处是参考数据接口文档进行判断。当result.body.status==0时，表示post提交请求已经顺利完成
           if (result.body.status == 0) {

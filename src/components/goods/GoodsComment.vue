@@ -1,5 +1,19 @@
 <template>
 	<div>
-		<h3>商品评论列表</h3>
+		<comment :listId="goodsId"></comment>
 	</div>
 </template>
+
+<script>
+import desComments from '../subcomponents/Comment.vue';
+export default {
+	data() {
+		return {
+			goodsId: this.$route.params.id,
+		};
+	},
+	components: {
+		comment: desComments,
+	},
+};
+</script>
