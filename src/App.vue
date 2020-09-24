@@ -1,5 +1,5 @@
 <template>
-	<div class="app_container">
+	<div class="app_container" ref="appContainer">
 		<mt-header fixed title="学无止境-网课随心购">
 			<span slot="left" v-show="flag" @click="goBack">
 				<mt-button icon="back">返回</mt-button>
@@ -58,6 +58,15 @@ export default {
    */
 	created() {
 		this.flag = this.$route.path == '/home' ? false : true;
+	},
+	mounted() {
+		document.body.addEventListener(
+			'touchmove',
+			function() {
+				console.log(document.documentElement.scrollTop);
+			},
+			false,
+		);
 	},
 	watch: {
 		'$route.path': function(newVal) {

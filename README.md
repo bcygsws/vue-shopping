@@ -179,3 +179,11 @@ deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，
 1.保证手机能够正常运行 2.保证手机和电脑连接在同一个 wifi 环境，也就是手机可以访问电脑的 ip 地址 3.打开自己的项目中 package.json 文件，在 dev 脚本中，添加一个--host 指令值，把当前电脑的 ip 地址值，设置为--host 的指令值
 
 - 如何查看自己电脑的 ip。在电脑 cmd 窗口，运行命令 ipconfig，查看无线网的 ip 地址
+
+## 上线测试
+### 运行项目，$: npm run dev,然后，双击ngrok.exe软件，输入ngrok http 项目使用的端口号。然后复制打印信息中Forwarding指向的网址，复制网址到浏览器，待资源加载完成后，项目即可显示出来
+### 将打包文件置于Apache中测试
+- 无需启动项目,$ npm run dev
+- 去项目dist文件夹下拷贝webpack打包好的文件，置于phpstudy中和MySQL和Apache同级的WWW文件夹中
+- 浏览器中输入127.0.0.1，即可打开项目
+
