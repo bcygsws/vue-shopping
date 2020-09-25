@@ -1,5 +1,5 @@
 <template>
-	<div class="app_container" ref="appContainer" id="chatBox-content-demo">
+	<div class="app_container">
 		<mt-header fixed title="生活宝App">
 			<span slot="left" v-show="flag" @click="goBack">
 				<mt-button icon="back">返回</mt-button>
@@ -31,12 +31,17 @@
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
 		</nav>
-		<transition>
-			<router-view></router-view>
-		</transition>
+		<div class="wraper" ref="wrapper">
+			<div class="content">
+				<transition>
+					<router-view></router-view>
+				</transition>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
+import Bscroll from '@better-scroll/core';
 export default {
 	data() {
 		return {
@@ -44,41 +49,19 @@ export default {
 			flag: false,
 		};
 	},
+	mounted() {
+		this.rightBarInit();
+	},
 	methods: {
+		rightBarInit() {
+			this.$nextTick(() => {
+				this.scroll = new Bscroll(this.$refs.wrapper, {
+				});
+			});
+		},
 		goBack() {
 			// 点击一次页面中“后退”按钮，返回到上一次，即：go(-1)
 			this.$router.go(-1);
-		},
-		scrollToTop() {
-			// 混杂模式下，IE FireFox和Chrome都是根据document.body.scrollTop获取该值
-			// 标准模式下，chrome也是根据document.body.scrollTop获取该值，只有IE是通过document.documentElement.scrollTop获取该值
-			var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-			// var scrollHeight = this.$refs.goodsListRef.offsetHeight;
-			// 向上卷曲的高度
-			console.log(scrollTop);
-			var clientH = document.documentElement.clientHeight;
-			var scrollH = document.body.scrollHeight;
-			if (scrollTop + 50 > scrollH - clientH) {
-				// 隐藏滚动条
-				scrollTop = scrollH - clientH - 50;
-				// document.documentElement.style.overflow = 'hidden';
-				window.scrollTo(0, document.body.scrollHeight); //控制滚动条的位置
-			}
-			// if(scrollTop===945){
-
-			// }
-			// 视口高度
-			console.log(document.documentElement.clientHeight);
-			console.log(document.body.scrollHeight);
-			// 内容高度
-			// console.log(scrollHeight);
-		},
-		scrollEvent() {
-			let _this = this;
-			let read = _this.$goodsListRef.querySelector('.goods_container');
-			// console.log('dfasdsaf'+red.scrollHeight);
-			// read.scrollToTop;
-			// console.log(read.scrollToTop);
 		},
 	},
 	// watch属性监控路由地址的变化，以确定【返回】按钮的显示或隐藏，当路由地址为："/home"表示在home主页，【返回】按钮应隐藏
@@ -89,9 +72,6 @@ export default {
    */
 	created() {
 		this.flag = this.$route.path == '/home' ? false : true;
-	},
-	mounted() {
-		window.addEventListener('scroll', this.scrollToTop);
 	},
 	watch: {
 		'$route.path': function(newVal) {

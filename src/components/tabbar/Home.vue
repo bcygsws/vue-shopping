@@ -1,5 +1,5 @@
 <template>
-  <div class="home_container">
+  <div class="home_container gundong">
     <!-- <h1>这是home组件</h1> -->
     <!-- home主页内的轮播图 -->
     <!-- <mt-swipe :auto="4000">
