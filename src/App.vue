@@ -1,6 +1,6 @@
 <template>
-	<div class="app_container" ref="appContainer">
-		<mt-header fixed title="学无止境-网课随心购">
+	<div class="app_container" ref="appContainer" id="chatBox-content-demo">
+		<mt-header fixed title="生活宝App">
 			<span slot="left" v-show="flag" @click="goBack">
 				<mt-button icon="back">返回</mt-button>
 			</span>
@@ -49,6 +49,37 @@ export default {
 			// 点击一次页面中“后退”按钮，返回到上一次，即：go(-1)
 			this.$router.go(-1);
 		},
+		scrollToTop() {
+			// 混杂模式下，IE FireFox和Chrome都是根据document.body.scrollTop获取该值
+			// 标准模式下，chrome也是根据document.body.scrollTop获取该值，只有IE是通过document.documentElement.scrollTop获取该值
+			var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+			// var scrollHeight = this.$refs.goodsListRef.offsetHeight;
+			// 向上卷曲的高度
+			console.log(scrollTop);
+			var clientH = document.documentElement.clientHeight;
+			var scrollH = document.body.scrollHeight;
+			if (scrollTop + 50 > scrollH - clientH) {
+				// 隐藏滚动条
+				scrollTop = scrollH - clientH - 50;
+				// document.documentElement.style.overflow = 'hidden';
+				window.scrollTo(0, document.body.scrollHeight); //控制滚动条的位置
+			}
+			// if(scrollTop===945){
+
+			// }
+			// 视口高度
+			console.log(document.documentElement.clientHeight);
+			console.log(document.body.scrollHeight);
+			// 内容高度
+			// console.log(scrollHeight);
+		},
+		scrollEvent() {
+			let _this = this;
+			let read = _this.$goodsListRef.querySelector('.goods_container');
+			// console.log('dfasdsaf'+red.scrollHeight);
+			// read.scrollToTop;
+			// console.log(read.scrollToTop);
+		},
 	},
 	// watch属性监控路由地址的变化，以确定【返回】按钮的显示或隐藏，当路由地址为："/home"表示在home主页，【返回】按钮应隐藏
 	// 在其他非"/home"路由时，按钮都应该隐藏
@@ -60,13 +91,7 @@ export default {
 		this.flag = this.$route.path == '/home' ? false : true;
 	},
 	mounted() {
-		document.body.addEventListener(
-			'touchmove',
-			function() {
-				console.log(document.documentElement.scrollTop);
-			},
-			false,
-		);
+		window.addEventListener('scroll', this.scrollToTop);
 	},
 	watch: {
 		'$route.path': function(newVal) {
@@ -81,6 +106,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .app_container {
+	/* height: 100%; */
 	padding-top: 40px;
 	padding-bottom: 50px;
 	/* 限制界面x方向的滚动，避免出现横向滚动条；只允许纵向的滚动条 */
