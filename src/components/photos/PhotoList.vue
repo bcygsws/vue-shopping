@@ -1,5 +1,5 @@
 <template>
-  <div class="photo_container">
+  <div class="photo_container gundong">
     <!-- <h2>这是图片列表组件</h2> -->
     <!-- 顶部滑动条，使用mui tab-top-webview-main.html中组件 -->
     <div id="slider" class="mui-slider">

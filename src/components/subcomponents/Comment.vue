@@ -108,6 +108,8 @@ export default {
 
 <style lang="less" scoped>
 .cmt_container {
+  width: 100%;
+  padding: 0 7px;
   h3 {
     font-size: 18px;
     border-bottom: 1px solid #ccc;
@@ -141,6 +143,9 @@ export default {
       margin-left: 30px;
       padding: 10px 0;
     }
+  }
+  .mint-button--primary{
+    margin-bottom: 15px;
   }
 }
 </style>

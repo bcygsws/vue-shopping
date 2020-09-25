@@ -32,11 +32,11 @@
 			</router-link>
 		</nav>
 		<div class="wraper" ref="wrapper">
-			<div class="content">
-				<transition>
-					<router-view></router-view>
-				</transition>
-			</div>
+			<!-- <div class="content"> -->
+			<transition>
+				<router-view class="content"></router-view>
+			</transition>
+			<!-- </div> -->
 		</div>
 	</div>
 </template>
@@ -56,6 +56,28 @@ export default {
 		rightBarInit() {
 			this.$nextTick(() => {
 				this.scroll = new Bscroll(this.$refs.wrapper, {
+					// 滚动方向为y轴
+					scrollY: true,
+					// 纵轴方向初始化位置
+					startY: 40,
+					// 页面能够点击
+					click: true,
+					// 页面能够触摸选中
+					tap: 'tap',
+					// 滚动的时候会派发scroll事件，会截流
+					probeType: 1,
+					// 人的手指无法向水平和垂直滚动条那样做到水平或者垂直滚动，让其自由滚动
+					freeScroll: true,
+					disableTouch: false,
+					bounce: {
+						top: true,
+						bottom: true,
+					},
+					bounceTime: 1800,
+					preventDefaultException: {
+						app_container: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/,
+						// 当滚动超过边缘时会有一段回弹动画
+					},
 				});
 			});
 		},
@@ -93,7 +115,10 @@ export default {
 	overflow-x: hidden;
 	/* 图片列表页向上卷曲时，由于该页面中顶部滑动栏也采用了定位，而且是在顶部固定栏header后面定义的，会压在header上面，因此需手动提高
      header的层级
-   */
+	 */
+	.wrapper {
+		position: relative;
+	}
 	.mint-header {
 		z-index: 99;
 	}

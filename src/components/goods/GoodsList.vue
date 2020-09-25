@@ -106,16 +106,12 @@ export default {
 
 <style lang="less" scoped>
 .goods_container {
-	/* 设置为公共类样式 .gundong */
-	/* position: absolute;
-	top: 40px;
-	bottom: 50px;
-	overflow-y: scroll; */
+	width: 100%;
+	padding: 7px;
 	.goodslist {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		padding: 7px;
 		.goodsitem {
 			width: 49%;
 			margin: 3px 1px;
@@ -168,8 +164,8 @@ export default {
 	}
 	/* 加载更多 */
 	.mint-button {
+		display: block;
 		width: 100%;
-		margin-bottom: 12px;
 	}
 }
 </style>

@@ -48,8 +48,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .info_container {
+	width: 100%;
 	/* 给内容区加个左右内边距 */
-	padding: 0 4px;
+	padding: 0 6px;
 	h3 {
 		font-size: 16px;
 		margin: 15px 0;

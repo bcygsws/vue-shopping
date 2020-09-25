@@ -1,5 +1,5 @@
 <template>
-	<div class="goodsdesc_container">
+	<div class="goodsdesc_container gundong">
 		<!-- <h3>这是图文详情组件</h3> -->
 		<!-- 图文详情 -->
 		<h3>{{ goodsDescInfo.title }}</h3>
@@ -40,7 +40,7 @@ export default {
 
 <style lang="less" scoped>
 .goodsdesc_container {
-	padding: 4px;
+	padding: 7px;
 	h3 {
 		color: #26a2ff;
 		line-height: 25px;

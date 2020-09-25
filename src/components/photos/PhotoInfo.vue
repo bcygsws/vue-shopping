@@ -1,5 +1,5 @@
 <template>
-  <div class="photoinfo_container">
+  <div class="photoinfo_container gundong">
     <!-- <h4>这是图片列表详情组件</h4> -->
     <h3>{{ imgInfo.title }}</h3>
     <p class="time_click">
