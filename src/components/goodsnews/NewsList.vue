@@ -1,4 +1,5 @@
 <template>
+  <!-- 设置滚动条 -->
   <div class="gundong">
     <!-- <h1>这是新闻列表组件</h1> -->
     <!-- 使用mui库中的media-list.html中组件 -->
