@@ -116,16 +116,19 @@ export default {
 		.mui-card {
 			.mui-card-content-inner {
 				display: flex;
+				display: -webkit-flex;
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
 				img {
 					/* 60/355 */
+					display: block;
 					width: 16.9%;
 					height: 16.9%;
-					vertical-align: bottom;
 				}
 				dl {
+					/* 必须加上，否则ios端购物车商品列表布局不能对齐的问题 */
+					width: 100%;
 					dt {
 						font-size: 14px;
 						line-height: 25px;
@@ -136,6 +139,7 @@ export default {
 						margin-left: 0;
 						&:last-child {
 							display: flex;
+							display: -webkit-flex;
 							flex-direction: row;
 							justify-content: space-between;
 							align-items: center;

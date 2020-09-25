@@ -154,7 +154,7 @@ export default {
 			const y = badgePosition.top - ballPosition.top;
 			el.style.transform = `translate(${x}px,${y}px)`;
 			// d.设置过渡的时间和方式
-			el.style.transition = 'all 3s cubic-bezier(.4,-0.3,1,.68)';
+			el.style.transition = 'all .8s cubic-bezier(.4,-0.3,1,.68)';
 			// 调用afterEnter(),类似回调函数
 			done();
 		},
