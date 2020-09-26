@@ -91,14 +91,14 @@ export default {
 	},
 	// watch属性监控路由地址的变化，以确定【返回】按钮的显示或隐藏，当路由地址为："/home"表示在home主页，【返回】按钮应隐藏
 	// 在其他非"/home"路由时，按钮都应该隐藏
-	/* bug:但是即使在非'/home'路由页面，当这些页面刷新时，浏览器都会重绘App.vue页面。flag变量值在watch属性中即使设定flag=true值将会销毁，flag变为默认值false,【返回】按钮
-     也将消失，为此使用生命周期钩子。App.vue初始化时，在生命周期钩子created也同样做一个判断，如是非'/home'路由，当页面重绘时，将其flag值
-     手动改成true
-   */
 	created() {
 		this.flag = this.$route.path == '/home' ? false : true;
 	},
 	watch: {
+		// 路由切换时，虚拟DOM会进行运算，只会重绘router-view那一部分内容。通过watch侦听当前路由的值是否为/home,以决定是否隐藏返回按钮。
+		// bug：然而当前页面如果处于非/home页面，一旦点了“刷新”该页面，flag变量值将被销毁，而回到默认值false,返回按钮在非/home页也将隐藏。为此，
+		// 需要在created生命周期钩子中提前判断该页面是否为/home,非/home页，flag就为true，要保持返回按钮的显示状态。反之，则flag为false,隐藏
+		// 返回按钮
 		'$route.path': function(newVal) {
 			if (newVal == '/home') {
 				this.flag = false;
