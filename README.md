@@ -24,9 +24,9 @@
 
 #### 首页布局
 
--   轮播图
--   六宫格导航
--   社区与论坛链接区
+-   搜索框-Search 组件(mint ui)
+-   轮播图-Swipe 组件(mint ui)
+-   六宫格导航- grid-default.html(mui)
 
 #### 首页数据渲染
 
