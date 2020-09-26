@@ -39,22 +39,22 @@
 				</router-link>
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
-				<a href="#">
+				<router-link to="/home/videolist">
 					<img src="../../images/menu5.png" alt="" />
 					<div class="mui-media-body">视频专区</div>
-				</a>
+				</router-link>
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
-				<a href="#">
+				<router-link to="/home/feedback">
 					<img src="../../images/menu4.png" alt="" />
 					<div class="mui-media-body">留言反馈</div>
-				</a>
+				</router-link>
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
-				<a href="#">
+				<router-link to="/home/informus">
 					<img src="../../images/menu6.png" alt="" />
 					<div class="mui-media-body">联系我们</div>
-				</a>
+				</router-link>
 			</li>
 		</ul>
 	</div>
