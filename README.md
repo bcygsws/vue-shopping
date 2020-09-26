@@ -5,7 +5,9 @@
 -   Mint UI+mui+flex+sass+vue2+vue-router+vuex+babel+ES6+webpack
 
 ## 项目运行
-- 
+- git clone https://github.com/bcygsws/vue-shopping.git --depth 1
+- 切换至项目路径，安装依赖：npm install
+- 运行项目：npm run dev
 
 ## 包含模块
 
