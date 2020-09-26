@@ -1,5 +1,5 @@
 <template>
-	<div class="info_container gundong">
+	<div class="info_container">
 		<!-- <h4>这是列表详情组件</h4> -->
 		<h3>{{ listinfo.title }}</h3>
 		<div class="head_title">

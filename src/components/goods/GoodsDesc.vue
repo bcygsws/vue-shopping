@@ -1,5 +1,5 @@
 <template>
-	<div class="goodsdesc_container gundong">
+	<div class="goodsdesc_container">
 		<!-- <h3>这是图文详情组件</h3> -->
 		<!-- 图文详情 -->
 		<h3>{{ goodsDescInfo.title }}</h3>

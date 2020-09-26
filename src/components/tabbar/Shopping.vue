@@ -1,5 +1,5 @@
 <template>
-	<div class="shopping_container gundong">
+	<div class="shopping_container">
 		<!--<h1>这是购物组件</h1>-->
 		<div class="pur_list">
 			<!-- 使用mui card.html中组件 -->

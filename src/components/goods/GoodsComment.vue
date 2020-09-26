@@ -1,5 +1,5 @@
 <template>
-	<div class="gundong">
+	<div>
 		<comment :listId="goodsId"></comment>
 	</div>
 </template>

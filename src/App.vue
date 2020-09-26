@@ -31,17 +31,19 @@
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
 		</nav>
-		<div class="wraper" ref="wrapper">
-			<!-- <div class="content"> -->
-			<transition>
-				<router-view class="content"></router-view>
-			</transition>
-			<!-- </div> -->
+		<div class="app_layout">
+			<div class="wraper outer" ref="wrapper">
+				<div class="content">
+					<transition>
+						<router-view></router-view>
+					</transition>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 <script>
-import Bscroll from '@better-scroll/core';
+// import Bscroll from '@better-scroll/core';
 export default {
 	data() {
 		return {
@@ -50,37 +52,38 @@ export default {
 		};
 	},
 	mounted() {
-		this.rightBarInit();
+		// this.rightBarInit();
 	},
 	methods: {
-		rightBarInit() {
-			this.$nextTick(() => {
-				this.scroll = new Bscroll(this.$refs.wrapper, {
-					// 滚动方向为y轴
-					scrollY: true,
-					// 纵轴方向初始化位置
-					startY: 40,
-					// 页面能够点击
-					click: true,
-					// 页面能够触摸选中
-					tap: 'tap',
-					// 滚动的时候会派发scroll事件，会截流
-					probeType: 1,
-					// 人的手指无法向水平和垂直滚动条那样做到水平或者垂直滚动，让其自由滚动
-					freeScroll: true,
-					disableTouch: false,
-					bounce: {
-						top: true,
-						bottom: true,
-					},
-					bounceTime: 1800,
-					preventDefaultException: {
-						app_container: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/,
-						// 当滚动超过边缘时会有一段回弹动画
-					},
-				});
-			});
-		},
+		// rightBarInit() {
+		// 	// 路由切换时，默认滚动条和重写的滚动条都隐藏，只有滚动时才显示better-scroll滚动条
+		// 	this.$nextTick(() => {
+		// 		this.scroll = new Bscroll(this.$refs.wrapper, {
+		// 			// 滚动方向为y轴
+		// 			scrollY: true,
+		// 			// 纵轴方向初始化位置
+		// 			startY: 40,
+		// 			// 页面能够点击
+		// 			click: true,
+		// 			// 页面能够触摸选中
+		// 			tap: 'tap',
+		// 			// 滚动的时候会派发scroll事件，会截流
+		// 			probeType: 1,
+		// 			// 人的手指无法向水平和垂直滚动条那样做到水平或者垂直滚动，让其自由滚动
+		// 			freeScroll: true,
+		// 			disableTouch: false,
+		// 			bounce: {
+		// 				top: true,
+		// 				bottom: true,
+		// 			},
+		// 			bounceTime: 1800,
+		// 			preventDefaultException: {
+		// 				app_container: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/,
+		// 				// 当滚动超过边缘时会有一段回弹动画
+		// 			},
+		// 		});
+		// 	});
+		// },
 		goBack() {
 			// 点击一次页面中“后退”按钮，返回到上一次，即：go(-1)
 			this.$router.go(-1);
@@ -109,18 +112,57 @@ export default {
 <style lang="scss" scoped>
 .app_container {
 	/* height: 100%; */
-	padding-top: 40px;
-	padding-bottom: 50px;
+	/* padding-top: 40px;
+	padding-bottom: 50px; */
 	/* 限制界面x方向的滚动，避免出现横向滚动条；只允许纵向的滚动条 */
 	overflow-x: hidden;
 	/* 图片列表页向上卷曲时，由于该页面中顶部滑动栏也采用了定位，而且是在顶部固定栏header后面定义的，会压在header上面，因此需手动提高
      header的层级
 	 */
-	.wrapper {
-		position: relative;
-	}
+
 	.mint-header {
 		z-index: 99;
+		height: 40px;
+	}
+	.app_layout {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		padding-top: 40px;
+		padding-bottom: 50px;
+		.outer {
+			/* 	position: relative; */
+			height: 100%;
+			overflow-y: auto;
+			/* 针对安卓端滚动条不显示的情况，添加以下伪元素，重写滚动条样式 */
+			&::-webkit-scrollbar-track-piece {
+				background-color: rgba(0, 0, 0, 0);
+				border-left: 1px solid rgba(0, 0, 0, 0);
+			}
+			&::-webkit-scrollbar {
+				width: 5px;
+				height: 13px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color: rgba(0, 0, 0, 0.5);
+				background-clip: padding-box;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				min-height: 28px;
+			}
+			&::-webkit-scrollbar-thumb:hover {
+				background-color: rgba(0, 0, 0, 0.5);
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+			}
+		}
 	}
 }
 .mui-bar .mui-icon-extra {

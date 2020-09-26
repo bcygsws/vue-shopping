@@ -1,5 +1,5 @@
 <template>
-	<div class="goods_container gundong">
+	<div class="goods_container">
 		<!--<h3>这是商品列表页</h3>-->
 		<div class="goodslist">
 			<!--注意：item.id等于95的打印机图片显示异常，为数据接口的问题，使用v-if和v-else处理，用本地图片替代-->

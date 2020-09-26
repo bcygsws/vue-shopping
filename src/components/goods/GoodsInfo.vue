@@ -1,5 +1,5 @@
 <template>
-	<div class="goodsinfo_container gundong">
+	<div class="goodsinfo_container">
 		<!-- <h3>这是商品详情页</h3> -->
 		<!--【添加购物车】按钮点击时，小球飞向购物车动画
     vue实现动画的三种方式：1.v-enter v-enter-active 6个类，transition设置name数值，name属性值代替默认的v
