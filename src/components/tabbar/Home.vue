@@ -40,14 +40,14 @@
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
 				<a href="#">
-					<img src="../../images/menu4.png" alt="" />
-					<div class="mui-media-body">留言反馈</div>
+					<img src="../../images/menu5.png" alt="" />
+					<div class="mui-media-body">视频专区</div>
 				</a>
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
 				<a href="#">
-					<img src="../../images/menu5.png" alt="" />
-					<div class="mui-media-body">视频专区</div>
+					<img src="../../images/menu4.png" alt="" />
+					<div class="mui-media-body">留言反馈</div>
 				</a>
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
@@ -101,32 +101,32 @@ export default {
 .home_container {
 	/* 搜索区样式 */
 	/deep/ .mint-search {
-    height: 44px;
-    .mint-searchbar{
-      background-color: #26a2ff;
-      /* 取消按钮字体大小 */
-      a.mint-searchbar-cancel{
-        font-size: 14px;
-        color: #ffffff;
-      }
-      .mint-searchbar-inner{
-        i.mintui{
-          font-size: 14px;
-          &::before{
-            color: #26a2ff;
-          }
-        }
-        input[type=search]{
-          margin: 0;
-          height: 28px;
-          background-color: #fff;
-          &::placeholder{
-            font-size: 12px;
-            color: #26a2ff;
-          }
-        }
-      }
-    }
+		height: 44px;
+		.mint-searchbar {
+			background-color: #26a2ff;
+			/* 取消按钮字体大小 */
+			a.mint-searchbar-cancel {
+				font-size: 14px;
+				color: #ffffff;
+			}
+			.mint-searchbar-inner {
+				i.mintui {
+					font-size: 14px;
+					&::before {
+						color: #26a2ff;
+					}
+				}
+				input[type='search'] {
+					margin: 0;
+					height: 28px;
+					background-color: #fff;
+					&::placeholder {
+						font-size: 12px;
+						color: #26a2ff;
+					}
+				}
+			}
+		}
 		.mint-search-list {
 			width: 100%;
 			height: 100px;

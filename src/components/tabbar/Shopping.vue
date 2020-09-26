@@ -14,7 +14,7 @@
 						<img :src="item.thumb_path" alt="" />
 						<dl>
 							<dt>{{ item.title }}</dt>
-							<dd>
+							<dd class="dd_numbox">
 								<span>￥{{ item.sell_price }}</span>
 								<!--子组件 数字输入框,父组件向子组件传值-->
 								<num-box :curVal="$store.getters.getGoodsCount[item.id]" :goodsId="item.id"></num-box>
@@ -137,20 +137,20 @@ export default {
 					}
 					dd {
 						margin-left: 0;
-						&:last-child {
-							display: flex;
-							display: -webkit-flex;
-							flex-direction: row;
-							justify-content: space-between;
-							align-items: center;
-							/* 让价格标签、数字输入框、删除标签居中 */
-							line-height: 33px;
-							> span {
-								font-size: 16px;
-								color: #e92312;
-								font-weight: 700;
-							}
+						> span {
+							font-size: 16px;
+							color: #e92312;
+							font-weight: 700;
 						}
+					}
+					dd.dd_numbox {
+						display: flex;
+						display: -webkit-flex;
+						flex-direction: row;
+						justify-content: space-between;
+						align-items: center;
+						/* 让价格标签、数字输入框、删除标签居中 */
+						line-height: 33px;
 					}
 				}
 			}
@@ -171,6 +171,10 @@ export default {
 							align-self: flex-end;
 						}
 					}
+				}
+				.mint-button {
+					width: 70px;
+					padding: 0 10px;
 				}
 			}
 		}
