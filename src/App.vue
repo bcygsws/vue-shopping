@@ -53,6 +53,28 @@ export default {
 	},
 	mounted() {
 		// this.rightBarInit();
+		// // 1.禁止双指放大
+		// document.body.addEventListener(
+		// 	'touchstart',
+		// 	function(event) {
+		// 		if (event.touches.length > 1) {
+		// 			event.preventDefault;
+		// 		}
+		// 	},
+		// 	false,
+		// );
+		// var lastTouchEnd = 0;
+		// document.body.addEventListener(
+		// 	'touchend',
+		// 	function(event) {
+		// 		var now = new Date().getTime();
+		// 		if (now - lastTouchEnd <= 300) {
+		// 			e.preventDefault();
+		// 		}
+		// 		lastTouchEnd = now;
+		// 	},
+		// 	false,
+		// );
 	},
 	methods: {
 		// rightBarInit() {
