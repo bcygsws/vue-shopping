@@ -33,7 +33,6 @@
 		"webpack-dev-server": "^3.10.3"
 	},
 	"dependencies": {
-		"@better-scroll/core": "^2.0.4",
 		"bootstrap": "^3.3.7",
 		"mint-ui": "^2.2.9",
 		"vue": "^2.5.2",

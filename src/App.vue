@@ -111,11 +111,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .app_container {
-	/* height: 100%; */
-	/* padding-top: 40px;
-	padding-bottom: 50px; */
 	/* 限制界面x方向的滚动，避免出现横向滚动条；只允许纵向的滚动条 */
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 	/* 图片列表页向上卷曲时，由于该页面中顶部滑动栏也采用了定位，而且是在顶部固定栏header后面定义的，会压在header上面，因此需手动提高
      header的层级
 	 */
@@ -135,32 +132,38 @@ export default {
 		.outer {
 			/* 	position: relative; */
 			height: 100%;
+			overflow: hidden;
 			overflow-y: auto;
 			/* 针对安卓端滚动条不显示的情况，添加以下伪元素，重写滚动条样式 */
+			/* 定义滚动条的宽高及圆角 */
+			&::-webkit-scrollbar {
+				width: 2px;
+				height: 13px;
+				-webkit-border-radius: 1px;
+				-moz-border-radius: 1px;
+				border-radius: 1px;
+			}
+			/* 滚动条没有滑块的滚动部分 */
 			&::-webkit-scrollbar-track-piece {
+				/* 都等于#ffffff白色 */
 				background-color: rgba(0, 0, 0, 0);
 				border-left: 1px solid rgba(0, 0, 0, 0);
 			}
-			&::-webkit-scrollbar {
-				width: 5px;
-				height: 13px;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
-			}
+			/* 滚动条上的滑动滑块-同时设置background-color改变滚动条滑块的颜色 */
 			&::-webkit-scrollbar-thumb {
-				background-color: rgba(0, 0, 0, 0.5);
+				background-color: rgba(0, 0, 0, 0.3);
+				/* padding-box背景绘制在衬距方框内,content-box裁剪在内容方框内，border-box默认值，没有裁剪 */
 				background-clip: padding-box;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
+				-webkit-border-radius: 1px;
+				-moz-border-radius: 1px;
+				border-radius: 1px;
 				min-height: 28px;
 			}
 			&::-webkit-scrollbar-thumb:hover {
-				background-color: rgba(0, 0, 0, 0.5);
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
+				background-color: rgba(0, 0, 0, 0.3);
+				-webkit-border-radius: 1px;
+				-moz-border-radius: 1px;
+				border-radius: 1px;
 			}
 		}
 	}
