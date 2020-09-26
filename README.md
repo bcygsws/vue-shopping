@@ -5,17 +5,28 @@
 -   Mint UI+mui+flex+sass+vue2+vue-router+vuex+babel+ES6+webpack
 
 ## 项目运行
-- git clone https://github.com/bcygsws/vue-shopping.git --depth 1
-- 切换至项目路径，安装依赖：npm install
-- 运行项目：npm run dev
+
+-   git clone https://github.com/bcygsws/vue-shopping.git --depth 1
+-   切换至项目路径，安装依赖：npm install
+-   运行项目：npm run dev
 
 ## 包含模块
 
 -   包含 4 个模块：首页、会员、购物车、搜索
 
+### 主页 App.vue
+
+-   顶部导航栏-Header 组件(mint ui)
+-   底部选项卡-Tabbar 组件(mui)
+-   路由切换页面(单页面)
+
 ### 首页模块
 
 #### 首页布局
+
+-   轮播图
+-   六宫格导航
+-   社区与论坛链接区
 
 #### 首页数据渲染
 
