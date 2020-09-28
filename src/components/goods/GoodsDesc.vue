@@ -47,7 +47,7 @@ export default {
 		font-size: 16px;
 		text-align: center;
 	}
-	// 样式不生效，使用/deep/,而且不会污染使用相同组件的公共样式
+	/* 样式不生效，使用/deep/,而且不会污染使用相同组件的公共样式 */
 	/deep/ .content {
 		> p {
 			text-indent: 2rem;
