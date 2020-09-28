@@ -1,6 +1,6 @@
 <template>
 	<div class="app_container">
-		<mt-header fixed title="生活宝App">
+		<mt-header fixed :title="$route.meta.title">
 			<span slot="left" v-show="flag" @click="goBack">
 				<mt-button icon="back">返回</mt-button>
 			</span>
