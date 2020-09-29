@@ -2,7 +2,7 @@
 	<div class="home_container">
 		<!-- <h1>这是home组件</h1> -->
 		<!-- 信息检索区 -->
-		<mt-search v-model="serachVal" cancel-text="取消" placeholder="搜索"> </mt-search>
+		<mt-search v-model="serachVal" cancel-text="取消" placeholder="搜索"></mt-search>
 
 		<!-- home主页内的轮播图 -->
 		<!-- <mt-swipe :auto="4000">

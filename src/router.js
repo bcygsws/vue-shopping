@@ -1,22 +1,37 @@
-/* jshint esversion:6 */
 // 路由相关文件
 import VueRouter from 'vue-router';
 // 导入home member search shopping共4个组件
-import home from './components/tabbar/Home.vue';
-import member from './components/tabbar/Member.vue';
-import shopping from './components/tabbar/Shopping.vue';
-import search from './components/tabbar/Search.vue';
-import newslist from './components/goodsnews/NewsList.vue';
-import newsinfo from './components/goodsnews/NewsInfo.vue';
-import photolist from './components/photos/PhotoList.vue';
-import photoinfo from './components/photos/PhotoInfo.vue';
-import goodslist from './components/goods/GoodsList.vue';
-import goodsinfo from './components/goods/GoodsInfo.vue';
-import goodsdesc from './components/goods/GoodsDesc.vue';
-import goodscomment from './components/goods/GoodsComment.vue';
-import videoList from './components/video/VideoList.vue';
-import feedback from './components/feedback/Feedback.vue';
-import informUs from './components/inform/Informus.vue';
+const home = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Home.vue');
+const member = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Member.vue');
+const shopping = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Shopping.vue');
+const search = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Search.vue');
+// import home from './components/tabBar/Home.vue';
+// import member from './components/tabBar/Member.vue';
+// import shopping from './components/tabBar/Shopping.vue';
+// import search from './components/tabBar/Search.vue';
+const newsList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsList.vue');
+const newsInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsInfo.vue');
+// import newsList from './components/goodsNews/newsList.vue';
+// import newsInfo from './components/goodsNews/newsInfo.vue';
+const photoList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoList.vue');
+const photoInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoInfo.vue');
+// import photoList from './components/photos/photoList.vue';
+// import photoInfo from './components/photos/photoInfo.vue';
+const goodsList = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsList.vue');
+const goodsInfo = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsInfo.vue');
+const goodsDesc = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsDesc.vue');
+const goodsComment = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsComment.vue');
+// import goodsList from './components/goods/goodsList.vue';
+// import goodsInfo from './components/goods/goodsInfo.vue';
+// import goodsDesc from './components/goods/goodsDesc.vue';
+// import goodsComment from './components/goods/goodsComment.vue';
+const videoList = () => import(/* webpackChunkName:'video' */ './components/video/VideoList.vue');
+// import videoList from './components/video/VideoList.vue';
+const feedback = () => import(/* webpackChunkName:'feedback' */ './components/feedback/Feedback.vue');
+// import feedback from './components/feedback/Feedback.vue';
+const informUs = () => import(/* webpackChunkName:'inform' */ './components/inform/InformUs.vue');
+// import informUs from './components/inform/InformUs.vue';
+/* path路径默认不区分大小写，在浏览器路由地址中都解析成了小写 */
 var router = new VueRouter({
 	routes: [
 		{
@@ -55,66 +70,66 @@ var router = new VueRouter({
 			},
 		},
 		{
-			path: '/home/newslist',
-			component: newslist,
+			path: '/home/newsList',
+			component: newsList,
 			meta: {
 				title: '新闻资讯',
 			},
 		},
 		{
-			path: '/home/newslist/:id',
-			component: newsinfo,
+			path: '/home/newsList/:id',
+			component: newsInfo,
 			meta: {
 				title: '资讯详情',
 			},
 		},
 		{
-			path: '/home/photolist',
-			component: photolist,
+			path: '/home/photoList',
+			component: photoList,
 			meta: {
 				title: '趣图',
 			},
 		},
 		{
-			path: '/home/photoinfo/:id',
-			component: photoinfo,
+			path: '/home/photoInfo/:id',
+			component: photoInfo,
 			meta: {
 				title: '图片掠影',
 			},
 		},
 		{
-			path: '/home/goodslist',
-			component: goodslist,
+			path: '/home/goodsList',
+			component: goodsList,
 			meta: {
 				title: '商品列表',
 			},
 		},
 		{
 			name: 'desc',
-			path: '/home/goodsdesc/:id',
-			component: goodsdesc,
+			path: '/home/goodsDesc/:id',
+			component: goodsDesc,
 			meta: {
 				title: '图文介绍',
 			},
 		},
 		{
 			name: 'info',
-			path: '/home/goodsinfo/:id',
-			component: goodsinfo,
+			path: '/home/goodsInfo/:id',
+			component: goodsInfo,
 			meta: {
 				title: '商品详情',
 			},
 		},
 		{
 			name: 'comment',
-			path: '/home/goodscomment/:id',
-			component: goodscomment,
+			path: '/home/goodsComment/:id',
+			component: goodsComment,
 			meta: {
 				title: '商品评论',
 			},
 		},
 		{
-			path: '/home/videolist',
+			path: '/home/videoList',
 			component: videoList,
 			meta: {
 				title: '视频专区',
@@ -128,7 +143,7 @@ var router = new VueRouter({
 			},
 		},
 		{
-			path: '/home/informus',
+			path: '/home/informUs',
 			component: informUs,
 			meta: {
 				title: '联系我们',

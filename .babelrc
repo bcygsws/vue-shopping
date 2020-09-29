@@ -11,6 +11,7 @@
 				}
 			]
 		],
-		"transform-remove-strict-mode"
+		"transform-remove-strict-mode",
+		"syntax-dynamic-import"
 	]
 }
