@@ -4,12 +4,10 @@
 		"transform-runtime",
 		[
 			"component",
-			[
-				{
-					"libraryName": "mint-ui",
-					"style": true
-				}
-			]
+			{
+				"libraryName": "mint-ui",
+				"style": true
+			}
 		],
 		"transform-remove-strict-mode",
 		"syntax-dynamic-import"

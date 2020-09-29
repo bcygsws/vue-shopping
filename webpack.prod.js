@@ -1,4 +1,5 @@
 // 由于 webpack 是基于Node进行构建的，所有，webpack的配置文件中，任何合法的Node代码都是支持的
+/* jshint esversion: 6 */
 var path = require('path');
 // 在内存中，根据指定的模板页面，生成一份内存中的首页，并且能够自动把打包好的bundle注入到页面底部，默认为根目录
 //类似如下：<script type="text/javascript" src="bundle.js"></script></body>
@@ -51,6 +52,7 @@ module.exports = {
 		alias: {
 			// 修改 Vue 被导入时候的包的路径
 			vue$: 'vue/dist/vue.js',
+			// 简化路由路径
 			'@': path.resolve('src/components'),
 		},
 	},
