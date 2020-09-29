@@ -1,21 +1,21 @@
 // 路由相关文件
 import VueRouter from 'vue-router';
 // 导入home member search shopping共4个组件
-const home = () => import(/* webpackChunkName:'tab_chunk' */ '@/tabBar/Home.vue');
-const member = () => import(/* webpackChunkName:'tab_chunk' */ '@/tabBar/Member.vue');
-const shopping = () => import(/* webpackChunkName:'tab_chunk' */ '@/tabBar/Shopping.vue');
-const search = () => import(/* webpackChunkName:'tab_chunk' */ '@/tabBar/Search.vue');
-const newsList = () => import(/* webpackChunkName:'newsInfo_list' */ '@/goodsNews/newsList.vue');
-const newsInfo = () => import(/* webpackChunkName:'newsInfo_list' */ '@/goodsNews/newsInfo.vue');
-const photoList = () => import(/* webpackChunkName:'newsInfo_list' */ '@/photos/photoList.vue');
-const photoInfo = () => import(/* webpackChunkName:'newsInfo_list' */ '@/photos/photoInfo.vue');
-const goodsList = () => import(/* webpackChunkName:'goods' */ '@/goods/goodsList.vue');
-const goodsInfo = () => import(/* webpackChunkName:'goods' */ '@/goods/goodsInfo.vue');
-const goodsDesc = () => import(/* webpackChunkName:'goods' */ '@/goods/goodsDesc.vue');
-const goodsComment = () => import(/* webpackChunkName:'goods' */ '@/goods/goodsComment.vue');
-const videoList = () => import(/* webpackChunkName:'video' */ '@/video/VideoList.vue');
-const feedback = () => import(/* webpackChunkName:'feedback' */ '@/feedback/Feedback.vue');
-const informUs = () => import(/* webpackChunkName:'inform' */ '@/inform/InformUs.vue');
+const home = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Home.vue');
+const member = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Member.vue');
+const shopping = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Shopping.vue');
+const search = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Search.vue');
+const newsList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsList.vue');
+const newsInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsInfo.vue');
+const photoList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoList.vue');
+const photoInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoInfo.vue');
+const goodsList = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsList.vue');
+const goodsInfo = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsInfo.vue');
+const goodsDesc = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsDesc.vue');
+const goodsComment = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsComment.vue');
+const videoList = () => import(/* webpackChunkName:'video' */ './components/video/VideoList.vue');
+const feedback = () => import(/* webpackChunkName:'feedback' */ './components/feedback/Feedback.vue');
+const informUs = () => import(/* webpackChunkName:'inform' */ './components/inform/InformUs.vue');
 
 /* 注意：
 vue中path路径默认不区分大小写，在浏览器路由地址中都解析成了小写 

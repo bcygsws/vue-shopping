@@ -19,9 +19,8 @@ clean-webpack-plugin 用于每次打包前，清理上次打包留下的文件�
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // 分离css插件
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const loader = require('sass-loader');
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
 		app: path.resolve(__dirname, 'src/main.js'), // 入口文件
 	},
@@ -75,16 +74,7 @@ module.exports = {
 						},
 					},
 					// 为某些css样式自动加上匹配浏览器种类的前缀
-					{
-						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
-					},
+					{ loader: 'postcss-loader' },
 				],
 			},
 			// 解析node_modules文件夹中的第三方库的css代码
@@ -99,16 +89,7 @@ module.exports = {
 						loader: 'css-loader',
 					},
 					// 为某些css样式自动加上匹配浏览器种类的前缀
-					{
-						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
-					},
+					{ loader: 'postcss-loader' },
 				],
 			},
 			// 处理less文件的loader
@@ -128,13 +109,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
@@ -155,13 +129,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
