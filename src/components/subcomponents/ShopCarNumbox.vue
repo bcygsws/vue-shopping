@@ -16,7 +16,7 @@
 
 <script>
 // numbox手动初花时，必须再次引入mui.min.js文件,否则报错：mui未定义
-import mui from '../../lib/mui/js/mui.min.js';
+import mui from '../../mui/js/mui.min.js';
 export default {
 	// curVal是购物车订单Shopping.vue中传入的当前值
 	props: ['curVal', 'goodsId'],

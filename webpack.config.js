@@ -19,11 +19,14 @@ clean-webpack-plugin 用于每次打包前，清理上次打包留下的文件�
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // 分离css插件
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const loader = require('sass-loader');
+// 优化css
+const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
 	mode: 'development',
 	entry: {
 		app: path.resolve(__dirname, 'src/main.js'), // 入口文件
+		vendors1: ['mint-ui'],
+		mui: path.resolve(__dirname, 'src/mui/js/mui.min.js'),
 	},
 	output: {
 		// 1.指定所有打包文件的输出选项
@@ -47,6 +50,32 @@ module.exports = {
 			filename: 'css/[name].css',
 		}),
 	],
+	// 抽离包
+	optimization: {
+		splitChunks: {
+			// chunks值为async表示抽离动态加载模块，initial表示抽离同步模块，all都同步和异步模块都生效
+			chunks: 'all',
+			// 使用缓存组
+			cacheGroups: {
+				vendors: {
+					//抽离第三方插件
+					test: /[\\/]node_modules[\\/]/,
+					chunks: 'initial',
+					name: 'vendors1',
+					priority: 10,
+					enforce: true,
+				},
+				localMui: {
+					// 抽离本地文件
+					test: path.resolve(__dirname, 'src/mui'),
+					chunks: 'initial',
+					name: 'mui',
+					priority: 10,
+					enforce: true,
+				},
+			},
+		},
+	},
 	module: {
 		// 配置所有第三方loader 模块的
 		rules: [
@@ -77,13 +106,6 @@ module.exports = {
 					// 为某些css样式自动加上匹配浏览器种类的前缀
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
@@ -101,13 +123,6 @@ module.exports = {
 					// 为某些css样式自动加上匹配浏览器种类的前缀
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
@@ -128,13 +143,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
@@ -155,13 +163,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-						options: {
-							plugins: loader => [
-								require('autoprefixer')({
-									browsers: ['ie >= 8', 'firfox >= 20', 'safari >= 5', 'android >=4', 'Ios >=6', 'last 4 version'],
-								}),
-							],
-						},
 					},
 				],
 			},
@@ -192,7 +193,17 @@ module.exports = {
 				],
 			}, // 处理 图片路径的 loader
 			// limit 给定的值，是图片的大小，单位是 byte， 如果我们引用的 图片，大于或等于给定的 limit值，则不会被转为base64格式的字符串， 如果 图片小于给定的 limit 值，则会被转为 base64的字符串
-			{ test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader' }, // 处理 字体文件的 loader
+			{
+				test: /\.(ttf|eot|svg|woff|woff2)$/,
+				use: {
+					loader: 'url-loader',
+					options: {
+						outputPath: './mui/fonts',
+						publicPath: '../mui/fonts',
+						limit: 29280,
+					},
+				},
+			}, // 处理 字体文件的 loader
 			{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }, // 配置 Babel 来转换高级的ES语法
 			{ test: /\.vue$/, use: 'vue-loader' }, // 处理 .vue 文件的 loader
 		],
