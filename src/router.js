@@ -5,33 +5,21 @@ const home = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBa
 const member = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Member.vue');
 const shopping = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Shopping.vue');
 const search = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Search.vue');
-// import home from './components/tabBar/Home.vue';
-// import member from './components/tabBar/Member.vue';
-// import shopping from './components/tabBar/Shopping.vue';
-// import search from './components/tabBar/Search.vue';
 const newsList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsList.vue');
 const newsInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/goodsNews/newsInfo.vue');
-// import newsList from './components/goodsNews/newsList.vue';
-// import newsInfo from './components/goodsNews/newsInfo.vue';
 const photoList = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoList.vue');
 const photoInfo = () => import(/* webpackChunkName:'newsInfo_list' */ './components/photos/photoInfo.vue');
-// import photoList from './components/photos/photoList.vue';
-// import photoInfo from './components/photos/photoInfo.vue';
 const goodsList = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsList.vue');
 const goodsInfo = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsInfo.vue');
 const goodsDesc = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsDesc.vue');
 const goodsComment = () => import(/* webpackChunkName:'goods' */ './components/goods/goodsComment.vue');
-// import goodsList from './components/goods/goodsList.vue';
-// import goodsInfo from './components/goods/goodsInfo.vue';
-// import goodsDesc from './components/goods/goodsDesc.vue';
-// import goodsComment from './components/goods/goodsComment.vue';
 const videoList = () => import(/* webpackChunkName:'video' */ './components/video/VideoList.vue');
-// import videoList from './components/video/VideoList.vue';
 const feedback = () => import(/* webpackChunkName:'feedback' */ './components/feedback/Feedback.vue');
-// import feedback from './components/feedback/Feedback.vue';
 const informUs = () => import(/* webpackChunkName:'inform' */ './components/inform/InformUs.vue');
-// import informUs from './components/inform/InformUs.vue';
-/* path路径默认不区分大小写，在浏览器路由地址中都解析成了小写 */
+
+/* 注意：
+vue中path路径默认不区分大小写，在浏览器路由地址中都解析成了小写 
+*/
 var router = new VueRouter({
 	routes: [
 		{
