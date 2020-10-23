@@ -17,16 +17,13 @@ const videoList = () => import(/* webpackChunkName:'video' */ './components/vide
 const feedback = () => import(/* webpackChunkName:'feedback' */ './components/feedback/Feedback.vue');
 const informUs = () => import(/* webpackChunkName:'inform' */ './components/inform/InformUs.vue');
 
-/* 注意：
-vue中path路径默认不区分大小写，在浏览器路由地址中都解析成了小写 
-*/
 var router = new VueRouter({
 	routes: [
 		{
 			path: '/',
 			redirect: '/home',
 			meta: {
-				title: '生活宝App',
+				title: '本地宝App',
 			},
 		},
 		{
