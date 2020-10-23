@@ -1,5 +1,6 @@
 // 路由相关文件
 import VueRouter from 'vue-router';
+// 路由懒加载
 // 导入home member search shopping共4个组件
 const home = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Home.vue');
 const member = () => import(/* webpackChunkName:'tab_chunk' */ './components/tabBar/Member.vue');
