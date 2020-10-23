@@ -53,7 +53,7 @@
 </template>
 <script>
 // 初始化滑动条mui('.mui-scroll-wrapper').scroll()后，提示“Error in mounted hook: "ReferenceError: mui is not defined"”
-import mui from "../../lib/mui/js/mui.min";
+import mui from "../../mui/js/mui.min";
 export default {
   data() {
     return {

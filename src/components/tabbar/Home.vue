@@ -18,7 +18,7 @@
     </mt-swipe> -->
 		<swipe :lunbo="lunboList" :isfull="true"></swipe>
 		<!-- 六宫格，又九宫格改造而来 -->
-		<ul class="mui-table-view mui-grid-view mui-grid-9">
+		<ul class="mui-table-view mui-grid-view mui-grid-9 six_gird">
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
 				<!-- 改造路由后，router-link定义后，自己会去找router-view,router-view放在了App中顶部栏和tabbar之间的区域 -->
 				<router-link to="/home/newslist">
@@ -133,7 +133,7 @@ export default {
 		}
 	}
 
-	.mui-grid-view {
+	.six_gird.mui-grid-view {
 		background-color: #fff;
 		li.mui-media {
 			background-color: #fff;

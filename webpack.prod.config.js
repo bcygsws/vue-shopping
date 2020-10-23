@@ -22,11 +22,10 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 // 优化css
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
 		app: path.resolve(__dirname, 'src/main.js'), // 入口文件
 		vendors1: ['mint-ui'],
-		mui: path.resolve(__dirname, 'src/mui/js/mui.min.js'),
 	},
 	output: {
 		// 1.指定所有打包文件的输出选项
@@ -65,14 +64,14 @@ module.exports = {
 					priority: 10,
 					enforce: true,
 				},
-				localMui: {
-					// 抽离本地文件
-					test: path.resolve(__dirname, 'src/mui'),
-					chunks: 'initial',
-					name: 'mui',
-					priority: 10,
-					enforce: true,
-				},
+				// localMui: {
+				// 	// 抽离本地文件
+				// 	test: path.resolve(__dirname, 'src/mui'),
+				// 	chunks: 'initial',
+				// 	name: 'mui',
+				// 	priority: 10,
+				// 	enforce: true,
+				// },
 			},
 		},
 	},
@@ -203,7 +202,7 @@ module.exports = {
 						limit: 29280,
 					},
 				},
-			}, // 处理 字体文件的 loader
+			},
 			{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }, // 配置 Babel 来转换高级的ES语法
 			{ test: /\.vue$/, use: 'vue-loader' }, // 处理 .vue 文件的 loader
 		],

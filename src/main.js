@@ -7,11 +7,11 @@ import app from './App.vue';
 // 导入路由相关文件router.js文件
 import router from './router.js';
 // 导入mui所需要的的css和js文件
-import './lib/mui/css/mui.min.css';
+import './mui/css/mui.min.css';
 // 参照mui官方文档，扩展字体要使用，需要添加
-import './lib/mui/css/icons-extra.css';
-import './lib/mui/fonts/mui-icons-extra.ttf';
-import './lib/mui/js/mui.min.js';
+import './mui/css/icons-extra.css';
+import './mui/fonts/mui-icons-extra.ttf';
+import './mui/js/mui.min.js';
 // 固定在顶部栏，要引用Mint UI中的组件
 // 导入Swipe组件-轮播图组件
 // 请求数据失败 弹框提示组件Toast
@@ -110,7 +110,7 @@ import VuePreview from 'vue-preview';
 // b.默认方式安装到Vue
 Vue.use(VuePreview);
 // c.导入缩略图样式文件
-import './lib/css/global.scss';
+import './css/global.scss';
 
 // 任何组件都可以访问全局转态，任何组件也都可以修改全局状态，所有引用全局转态的视图都会响应这种改变，这就是vuex的功能
 // a.导包
